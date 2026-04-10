@@ -5,35 +5,34 @@ import {
   ResponsiveContainer, Legend,
 } from "recharts";
 
-// ── REAL DATA FROM YOUTUBE ANALYTICS Q1 2026 ─────────────────────────────
 const weeklyData = [
-  { week: "Jan 05", engagements: 17,  likes: 15,  comments: 0, shares: 2,  views: 1231  },
-  { week: "Jan 12", engagements: 2,   likes: 2,   comments: 0, shares: 0,  views: 60    },
-  { week: "Jan 19", engagements: 1,   likes: 1,   comments: 0, shares: 0,  views: 320   },
-  { week: "Jan 26", engagements: 7,   likes: 5,   comments: 0, shares: 2,  views: 1582  },
-  { week: "Feb 02", engagements: 10,  likes: 4,   comments: 2, shares: 4,  views: 656   },
-  { week: "Feb 09", engagements: 10,  likes: 5,   comments: 1, shares: 4,  views: 500   },
-  { week: "Feb 16", engagements: 11,  likes: 8,   comments: 1, shares: 2,  views: 281   },
-  { week: "Feb 23", engagements: 18,  likes: 10,  comments: 0, shares: 8,  views: 495   },
-  { week: "Mar 02", engagements: 147, likes: 125, comments: 4, shares: 18, views: 11930 },
-  { week: "Mar 09", engagements: 144, likes: 111, comments: 1, shares: 32, views: 9972  },
-  { week: "Mar 16", engagements: 166, likes: 139, comments: 4, shares: 23, views: 11930 },
-  { week: "Mar 23", engagements: 227, likes: 204, comments: 7, shares: 16, views: 42216 },
-  { week: "Mar 30", engagements: 81,  likes: 75,  comments: 3, shares: 3,  views: 12176 },
+  { week: "Jan 05", engagements: 17,  likes: 15,  comments: 0, shares: 2,  views: 1231,  posts: 3  },
+  { week: "Jan 12", engagements: 2,   likes: 2,   comments: 0, shares: 0,  views: 60,    posts: 1  },
+  { week: "Jan 19", engagements: 1,   likes: 1,   comments: 0, shares: 0,  views: 320,   posts: 3  },
+  { week: "Jan 26", engagements: 7,   likes: 5,   comments: 0, shares: 2,  views: 1582,  posts: 3  },
+  { week: "Feb 02", engagements: 10,  likes: 4,   comments: 2, shares: 4,  views: 656,   posts: 2  },
+  { week: "Feb 09", engagements: 10,  likes: 5,   comments: 1, shares: 4,  views: 500,   posts: 3  },
+  { week: "Feb 16", engagements: 11,  likes: 8,   comments: 1, shares: 2,  views: 281,   posts: 3  },
+  { week: "Feb 23", engagements: 18,  likes: 10,  comments: 0, shares: 8,  views: 495,   posts: 7  },
+  { week: "Mar 02", engagements: 146, likes: 124, comments: 4, shares: 18, views: 11934, posts: 20 },
+  { week: "Mar 09", engagements: 143, likes: 110, comments: 1, shares: 32, views: 9975,  posts: 15 },
+  { week: "Mar 16", engagements: 166, likes: 139, comments: 4, shares: 23, views: 11934, posts: 20 },
+  { week: "Mar 23", engagements: 227, likes: 204, comments: 7, shares: 16, views: 42329, posts: 23 },
+  { week: "Mar 30", engagements: 125, likes: 112, comments: 3, shares: 10, views: 17421, posts: 20 },
+  { week: "Apr 06", engagements: 8,   likes: 6,   comments: 0, shares: 2,  views: 1089,  posts: 9  },
 ];
 
 const monthlyData = [
-  { month: "Jan", engagements: 29,  likes: 24,  comments: 0,  shares: 5,  views: 3324  },
-  { month: "Feb", engagements: 48,  likes: 26,  comments: 4,  shares: 18, views: 1850  },
-  { month: "Mar", engagements: 736, likes: 626, comments: 19, shares: 91, views: 83146 },
+  { month: "Jan",  engagements: 29,  likes: 24,  comments: 0,  shares: 5,  views: 3324,  posts: 11 },
+  { month: "Feb",  engagements: 48,  likes: 26,  comments: 4,  shares: 18, views: 1850,  posts: 14 },
+  { month: "Mar",  engagements: 734, likes: 624, comments: 19, shares: 91, views: 83714, posts: 85 },
+  { month: "Apr*", engagements: 82,  likes: 72,  comments: 0,  shares: 10, views: 11050, posts: 23 },
 ];
 
 const topPosts = [
-  { date: "Mar 27", engagements: 91, likes: 87, comments: 4, shares: 0,  views: 23784, title: "Ferrari 458 — the one car a real enthusiast would pick" },
-  { date: "Mar 03", engagements: 23, likes: 22, comments: 0, shares: 1,  views: 903,   title: "3 types of financial advisors on social media" },
-  { date: "Mar 03", engagements: 22, likes: 22, comments: 0, shares: 0,  views: 1589,  title: "Range Rover SV vs Lamborghini Urus" },
-  { date: "Mar 14", engagements: 21, likes: 20, comments: 0, shares: 1,  views: 1258,  title: "Let me save you some money..." },
-  { date: "Mar 13", engagements: 20, likes: 12, comments: 0, shares: 8,  views: 673,   title: "Words you use on a discovery call" },
+  { date: "Mar 27", engagements: 91, likes: 87, views: 23784, title: "Ferrari 458 — the one car a real enthusiast would pick" },
+  { date: "Mar 03", engagements: 22, likes: 22, views: 1589,  title: "Range Rover SV vs Lamborghini Urus" },
+  { date: "Mar 03", engagements: 22, likes: 22, views: 903,   title: "3 types of financial advisors on social media" },
 ];
 
 const GOLD     = "#c9a84c";
@@ -43,6 +42,7 @@ const GREEN_DIM= "rgba(63,185,80,0.12)";
 const RED      = "#f85149";
 const RED_DIM  = "rgba(248,81,73,0.12)";
 const BLUE     = "#58a6ff";
+const BLUE_DIM = "rgba(88,166,255,0.1)";
 const YT_RED   = "#ff4444";
 const YT_DIM   = "rgba(255,68,68,0.12)";
 const MUTED    = "#8892a4";
@@ -74,7 +74,7 @@ function CustomTooltip({ active, payload, label }) {
     <div style={{ background: "#1a2235", border: `1px solid ${BORDER}`, borderRadius: 8, padding: "10px 14px" }}>
       <div style={{ fontSize: 11, color: MUTED, marginBottom: 6 }}>{label}</div>
       {payload.map((p, i) => (
-        <div key={i} style={{ fontSize: 13, color: p.color, marginBottom: 2 }}>{p.name}: <strong>{p.value.toLocaleString()}</strong></div>
+        <div key={i} style={{ fontSize: 13, color: p.color, marginBottom: 2 }}>{p.name}: <strong>{p.value?.toLocaleString()}</strong></div>
       ))}
     </div>
   );
@@ -90,11 +90,11 @@ function Clock() {
 }
 
 export default function App() {
-  // MoM: Feb vs Mar
-  const engMoM  = Math.round(((736 - 48) / 48) * 100);   // +1433%
-  const viewsMoM = Math.round(((83146 - 1850) / 1850) * 100);
-  const likesMoM = Math.round(((626 - 26) / 26) * 100);
-  const subGrowth = Math.round(((2030 - 1940) / 1940) * 100);
+  const engMoM   = Math.round(((734 - 48) / 48) * 100);
+  const viewsMoM = Math.round(((83714 - 1850) / 1850) * 100);
+  const likesMoM = Math.round(((624 - 26) / 26) * 100);
+  const aprEng   = 82;
+  const aprPosts = 23;
 
   return (
     <div style={{ background: "#0a0f1e", minHeight: "100vh", fontFamily: "'DM Sans', sans-serif", color: "#f0f6fc" }}>
@@ -113,11 +113,11 @@ export default function App() {
           <div style={{ width: 36, height: 36, background: YT_RED, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, color: "#fff" }}>▶</div>
           <div>
             <div style={{ fontSize: 15, fontWeight: 600, letterSpacing: "-0.01em" }}>Elite Partners Group — YouTube Performance</div>
-            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: MUTED, letterSpacing: 1, textTransform: "uppercase" }}>Advisor Talk with Frank LaRosa · Q1 2026</div>
+            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: MUTED, letterSpacing: 1, textTransform: "uppercase" }}>Advisor Talk with Frank LaRosa · Jan–Apr 9, 2026</div>
           </div>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
-          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, letterSpacing: 2, textTransform: "uppercase", background: YT_DIM, color: YT_RED, padding: "5px 12px", borderRadius: 6, border: `1px solid rgba(255,68,68,0.2)` }}>Jan – Apr 2026</div>
+          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, letterSpacing: 2, textTransform: "uppercase", background: YT_DIM, color: YT_RED, padding: "5px 12px", borderRadius: 6, border: `1px solid rgba(255,68,68,0.2)` }}>Jan – Apr 9, 2026</div>
           <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, color: MUTED }}>
             <div style={{ width: 8, height: 8, borderRadius: "50%", background: GREEN, animation: "pulse 2s infinite" }} />
             Live Dashboard
@@ -133,18 +133,15 @@ export default function App() {
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
             <div style={{ fontSize: 13, color: YT_RED, fontWeight: 600, textTransform: "uppercase", letterSpacing: 1 }}>⚡ March Breakout</div>
             <div style={{ fontSize: 13, color: MUTED }}>
-              Engagements surged from <span style={{ color: "#f0f6fc", fontWeight: 600 }}>48</span> in Feb to <span style={{ color: YT_RED, fontWeight: 600 }}>736</span> in March — a <span style={{ color: GREEN, fontWeight: 600 }}>+1,433%</span> jump driven by viral short-form content
+              Engagements surged from <span style={{ color: "#f0f6fc", fontWeight: 600 }}>48</span> in Feb to <span style={{ color: YT_RED, fontWeight: 600 }}>734</span> in March — a <span style={{ color: GREEN, fontWeight: 600 }}>+{engMoM.toLocaleString()}%</span> jump · 85 videos published in March vs 14 in Feb
             </div>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
-            {[
-              { label: "Jan Engagements", val: "29"  },
-              { label: "Feb Engagements", val: "48"  },
-              { label: "Mar Engagements", val: "736" },
-            ].map((g) => (
+            {[{ label: "Jan", val: "29", sub: "11 videos" }, { label: "Feb", val: "48", sub: "14 videos" }, { label: "Mar", val: "734", sub: "85 videos" }, { label: "Apr*", val: "82", sub: "23 videos" }].map((g) => (
               <div key={g.label} style={{ textAlign: "center" }}>
-                <div style={{ fontSize: 11, color: MUTED, marginBottom: 2 }}>{g.label}</div>
-                <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 700, color: g.label === "Mar Engagements" ? YT_RED : "#f0f6fc" }}>{g.val}</div>
+                <div style={{ fontSize: 11, color: MUTED, marginBottom: 2 }}>{g.label} Eng</div>
+                <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 20, fontWeight: 700, color: g.label === "Mar" ? YT_RED : "#f0f6fc" }}>{g.val}</div>
+                <div style={{ fontSize: 10, color: MUTED }}>{g.sub}</div>
               </div>
             ))}
           </div>
@@ -152,20 +149,19 @@ export default function App() {
 
         {/* ROW 1: KPI CARDS */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14, marginBottom: 20 }}>
-          <KpiCard source="YouTube · Advisor Talk" label="Total Engagements (Mar)" value="736" delta={engMoM} deltaLabel="vs Feb (48)" accent={YT_RED} large />
-          <KpiCard source="YouTube · Advisor Talk" label="Total Likes (Mar)" value="626" delta={likesMoM} deltaLabel="vs Feb (26)" accent={YT_RED} />
-          <KpiCard source="YouTube · Advisor Talk" label="Total Video Views (Mar)" value="83,146" delta={viewsMoM} deltaLabel="vs Feb (1,850)" accent={BLUE} />
-          <KpiCard source="YouTube · Advisor Talk" label="Channel Subscribers" value="2,030" delta={subGrowth} deltaLabel="Q1 gain: +116 subs" sub="Started Q1 at 1,940" accent={GREEN} />
+          <KpiCard source="YouTube · Advisor Talk" label="Total Engagements (Mar)" value="734" delta={engMoM} deltaLabel="vs Feb (48)" accent={YT_RED} large />
+          <KpiCard source="YouTube · Advisor Talk" label="Total Likes (Mar)" value="624" delta={likesMoM} deltaLabel="vs Feb (26)" accent={YT_RED} />
+          <KpiCard source="YouTube · Advisor Talk" label="Total Video Views (Mar)" value="83,714" delta={viewsMoM} deltaLabel="vs Feb (1,850)" accent={BLUE} />
+          <KpiCard source="YouTube · Advisor Talk" label="April (partial · 9 days)" value="82 eng" accent={GREEN} sub={`${aprPosts} videos · 11,050 views`} />
         </div>
 
         {/* ROW 2: CHARTS */}
-        <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 14, marginBottom: 20 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 14, marginBottom: 14 }}>
 
-          {/* Weekly Engagements Chart */}
           <div style={{ background: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 12, padding: "20px 24px" }}>
-            <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 2 }}>Weekly Engagements — Advisor Talk YouTube</div>
-            <div style={{ fontSize: 11, color: MUTED, marginBottom: 16 }}>Q1 2026 · Likes + Comments + Shares</div>
-            <ResponsiveContainer width="100%" height={220}>
+            <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 2 }}>Weekly Engagements & Views — Advisor Talk YouTube</div>
+            <div style={{ fontSize: 11, color: MUTED, marginBottom: 12 }}>Jan–Apr 2026 · Likes + Comments + Shares</div>
+            <ResponsiveContainer width="100%" height={190}>
               <AreaChart data={weeklyData} margin={{ top: 5, right: 10, left: -10, bottom: 0 }}>
                 <defs>
                   <linearGradient id="engGrad" x1="0" y1="0" x2="0" y2="1">
@@ -187,88 +183,107 @@ export default function App() {
                 <Area yAxisId="right" type="monotone" dataKey="views" name="Views" stroke={BLUE} strokeWidth={1.5} fill="url(#viewsGrad)" strokeDasharray="5 4" dot={false} />
               </AreaChart>
             </ResponsiveContainer>
+
+            <div style={{ borderTop: `1px solid ${BORDER}`, marginTop: 16, paddingTop: 14 }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: MUTED, marginBottom: 8 }}>
+                Videos Published Per Week
+                <span style={{ fontWeight: 400, fontSize: 10, marginLeft: 8 }}>quality vs. quantity context</span>
+              </div>
+              <ResponsiveContainer width="100%" height={95}>
+                <BarChart data={weeklyData} margin={{ top: 0, right: 10, left: -10, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke={BORDER} vertical={false} />
+                  <XAxis dataKey="week" tick={{ fill: MUTED, fontSize: 10 }} axisLine={false} tickLine={false} />
+                  <YAxis tick={{ fill: MUTED, fontSize: 10 }} axisLine={false} tickLine={false} />
+                  <Tooltip content={<CustomTooltip />} />
+                  <Bar dataKey="posts" name="Videos" fill={YT_RED} radius={[3, 3, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
           </div>
 
-          {/* Monthly Bar Chart */}
           <div style={{ background: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 12, padding: "20px 24px" }}>
             <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 2 }}>Monthly Engagement Breakdown</div>
-            <div style={{ fontSize: 11, color: MUTED, marginBottom: 16 }}>Likes · Comments · Shares · Q1 2026</div>
-            <ResponsiveContainer width="100%" height={220}>
+            <div style={{ fontSize: 11, color: MUTED, marginBottom: 16 }}>Likes · Comments · Shares · Jan–Apr 2026</div>
+            <ResponsiveContainer width="100%" height={200}>
               <BarChart data={monthlyData} margin={{ top: 5, right: 10, left: -10, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke={BORDER} />
                 <XAxis dataKey="month" tick={{ fill: MUTED, fontSize: 11 }} axisLine={false} tickLine={false} />
                 <YAxis tick={{ fill: MUTED, fontSize: 10 }} axisLine={false} tickLine={false} />
                 <Tooltip content={<CustomTooltip />} />
                 <Legend wrapperStyle={{ fontSize: 11, color: MUTED }} />
-                <Bar dataKey="likes" name="Likes" fill={YT_RED} radius={[4, 4, 0, 0]} stackId="a" />
+                <Bar dataKey="likes" name="Likes" fill={YT_RED} radius={[0, 0, 0, 0]} stackId="a" />
                 <Bar dataKey="comments" name="Comments" fill={GOLD} radius={[0, 0, 0, 0]} stackId="a" />
                 <Bar dataKey="shares" name="Shares" fill={BLUE} radius={[4, 4, 0, 0]} stackId="a" />
               </BarChart>
             </ResponsiveContainer>
+            <div style={{ marginTop: 14, padding: "10px 14px", background: YT_DIM, border: `1px solid rgba(255,68,68,0.15)`, borderRadius: 8, fontSize: 11, color: YT_RED, lineHeight: 1.5 }}>
+              ⚡ 90% of Q1 engagements happened in March — 85 videos published
+            </div>
           </div>
         </div>
 
-        {/* ROW 3: BOTTOM CARDS */}
+        {/* ROW 3: BOTTOM */}
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 14 }}>
 
-          {/* Q1 Summary */}
           <div style={{ background: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 12, padding: "20px 24px" }}>
-            <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 16 }}>Q1 2026 Summary</div>
+            <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 16 }}>Q1 + Apr 2026 Summary</div>
             {[
-              { label: "Total Engagements", val: "813",    color: YT_RED },
-              { label: "Total Likes",        val: "705",    color: YT_RED },
-              { label: "Total Comments",     val: "23",     color: GOLD   },
-              { label: "Total Shares",       val: "115",    color: BLUE   },
-              { label: "Total Video Views",  val: "93,480", color: BLUE   },
-              { label: "New Subscribers",    val: "+116",   color: GREEN  },
-              { label: "Videos Published",   val: "122",    color: MUTED  },
+              { label: "Total Engagements (Q1)", val: "811",    color: YT_RED },
+              { label: "Total Likes (Q1)",        val: "699",    color: YT_RED },
+              { label: "Total Comments (Q1)",     val: "23",     color: GOLD   },
+              { label: "Total Shares (Q1)",       val: "114",    color: BLUE   },
+              { label: "Total Video Views (Q1)",  val: "104,764",color: BLUE   },
+              { label: "Videos Published (Q1)",   val: "110",    color: MUTED  },
+              { label: "April Engagements",       val: "82",     color: GREEN  },
+              { label: "April Videos",            val: "23",     color: MUTED  },
             ].map((item) => (
-              <div key={item.label} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 0", borderBottom: `1px solid ${BORDER}` }}>
-                <span style={{ fontSize: 13, color: MUTED }}>{item.label}</span>
-                <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 14, fontWeight: 600, color: item.color }}>{item.val}</span>
+              <div key={item.label} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "7px 0", borderBottom: `1px solid ${BORDER}` }}>
+                <span style={{ fontSize: 12, color: MUTED }}>{item.label}</span>
+                <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 13, fontWeight: 600, color: item.color }}>{item.val}</span>
               </div>
             ))}
           </div>
 
-          {/* Top Posts */}
           <div style={{ background: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 12, padding: "20px 24px" }}>
             <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 4 }}>Top Posts by Engagements</div>
-            <div style={{ fontSize: 11, color: MUTED, marginBottom: 16 }}>Q1 2026 · Top 5</div>
+            <div style={{ fontSize: 11, color: MUTED, marginBottom: 14 }}>Q1 2026 · Top 3 · Hootsuite export</div>
             {topPosts.map((p, i) => (
-              <div key={i} style={{ display: "flex", alignItems: "center", gap: 12, padding: "8px 10px", borderRadius: 8, background: i === 0 ? YT_DIM : "transparent", marginBottom: 6 }}>
-                <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: i === 0 ? YT_RED : MUTED, width: 16 }}>#{i + 1}</div>
+              <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: "10px", borderRadius: 8, background: i === 0 ? YT_DIM : "rgba(255,255,255,0.02)", marginBottom: 8, border: i === 0 ? `1px solid rgba(255,68,68,0.2)` : "1px solid transparent" }}>
+                <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: i === 0 ? YT_RED : MUTED, width: 16, flexShrink: 0, paddingTop: 1 }}>#{i + 1}</div>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 12, color: "#f0f6fc", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{p.title}</div>
-                  <div style={{ fontSize: 11, color: MUTED }}>{p.date} · {p.views.toLocaleString()} views</div>
+                  <div style={{ fontSize: 11, color: "#f0f6fc", lineHeight: 1.4, marginBottom: 3, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}>{p.title}</div>
+                  <div style={{ fontSize: 10, color: MUTED }}>{p.date} · {p.views.toLocaleString()} views · {p.likes} likes</div>
                 </div>
-                <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 13, fontWeight: 600, color: i === 0 ? YT_RED : GREEN, flexShrink: 0 }}>{p.engagements} eng</div>
+                <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 13, fontWeight: 600, color: i === 0 ? YT_RED : GREEN, flexShrink: 0 }}>{p.engagements}</div>
               </div>
             ))}
+            <div style={{ marginTop: 8, padding: "10px 14px", background: BLUE_DIM, border: `1px solid rgba(88,166,255,0.15)`, borderRadius: 8, fontSize: 11, color: BLUE, lineHeight: 1.5 }}>
+              💡 Only 3 top posts returned by Hootsuite — Ferrari content drove the March spike
+            </div>
           </div>
 
-          {/* Engagement Breakdown */}
           <div style={{ background: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 12, padding: "20px 24px" }}>
             <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 4 }}>March Engagement Breakdown</div>
-            <div style={{ fontSize: 11, color: MUTED, marginBottom: 20 }}>Best month of Q1 · 736 total engagements</div>
+            <div style={{ fontSize: 11, color: MUTED, marginBottom: 20 }}>Best month of Q1 · 734 total engagements</div>
             {[
-              { label: "Likes",    val: 626, total: 736, color: YT_RED },
-              { label: "Shares",   val: 91,  total: 736, color: BLUE   },
-              { label: "Comments", val: 19,  total: 736, color: GOLD   },
+              { label: "Likes",    val: 624, total: 734, color: YT_RED },
+              { label: "Shares",   val: 91,  total: 734, color: BLUE   },
+              { label: "Comments", val: 19,  total: 734, color: GOLD   },
             ].map((item) => (
-              <div key={item.label} style={{ marginBottom: 16 }}>
+              <div key={item.label} style={{ marginBottom: 18 }}>
                 <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
                   <span style={{ fontSize: 13, color: MUTED }}>{item.label}</span>
                   <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 13, color: item.color, fontWeight: 600 }}>
                     {item.val} <span style={{ color: MUTED, fontWeight: 400 }}>({Math.round((item.val / item.total) * 100)}%)</span>
                   </span>
                 </div>
-                <div style={{ height: 6, background: "rgba(255,255,255,0.07)", borderRadius: 3, overflow: "hidden" }}>
+                <div style={{ height: 7, background: "rgba(255,255,255,0.06)", borderRadius: 3, overflow: "hidden" }}>
                   <div style={{ height: "100%", borderRadius: 3, width: `${(item.val / item.total) * 100}%`, background: item.color }} />
                 </div>
               </div>
             ))}
-            <div style={{ marginTop: 16, padding: "10px 14px", background: "rgba(255,68,68,0.06)", border: `1px solid rgba(255,68,68,0.15)`, borderRadius: 8, fontSize: 11, color: YT_RED, lineHeight: 1.5 }}>
-              ⚡ 91% of Q1 engagements happened in March alone
+            <div style={{ marginTop: 8, padding: "10px 14px", background: YT_DIM, border: `1px solid rgba(255,68,68,0.15)`, borderRadius: 8, fontSize: 11, color: YT_RED, lineHeight: 1.5 }}>
+              ⚡ Volume tripled in March (85 videos) — same question as LinkedIn: quality or quantity?
             </div>
           </div>
 
@@ -278,8 +293,8 @@ export default function App() {
       {/* FOOTER */}
       <div style={{ borderTop: `1px solid ${BORDER}`, padding: "12px 32px", display: "flex", justifyContent: "space-between", fontFamily: "'DM Mono', monospace", fontSize: 10, color: MUTED, marginTop: 24 }}>
         <span>Elite Partners Group · YouTube Dashboard · Advisor Talk with Frank LaRosa</span>
-        <span>Source: Hootsuite YouTube Export · Q1 2026 · Jan 1 – Apr 5</span>
-        <span>122 videos published · 93,480 total views · 2,030 subscribers</span>
+        <span>Source: Hootsuite YouTube Export · Jan 1 – Apr 9, 2026</span>
+        <span>110 Q1 videos · 104,764 total views · Apr partial: 23 videos</span>
       </div>
     </div>
   );
