@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import * as XLSX from "xlsx";
 import {
   AreaChart, Area, BarChart, Bar,
   XAxis, YAxis, CartesianGrid, Tooltip,
@@ -49,6 +50,31 @@ const MUTED    = "#8892a4";
 const BORDER   = "rgba(255,255,255,0.07)";
 const SURFACE  = "#111827";
 
+function parseHMS(s) {
+  if (!s) return 0;
+  const parts = String(s).split(":").map(Number);
+  if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
+  return 0;
+}
+
+function formatMonth(ym) {
+  const [y, m] = ym.split("-");
+  const names = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  return `${names[parseInt(m) - 1]} '${y.slice(2)}`;
+}
+
+function videoTitle(message) {
+  if (!message || message.trim() === "") return "(No description available)";
+  const first = message.split("\n")[0].trim();
+  return first.length > 72 ? first.slice(0, 72) + "…" : first;
+}
+
+function fmtSec(sec) {
+  const m = Math.floor(sec / 60);
+  const s = Math.round(sec % 60);
+  return `${m}:${String(s).padStart(2, "0")}`;
+}
+
 function KpiCard({ source, label, value, delta, deltaLabel, accent, large, sub }) {
   const isUp = delta > 0;
   return (
@@ -89,12 +115,122 @@ function Clock() {
   return <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 14, color: "#f0f6fc", letterSpacing: 1 }}>{h}:{m} {ampm}</span>;
 }
 
+function VideoCard({ video }) {
+  const thumb = `https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`;
+  const url   = `https://www.youtube.com/watch?v=${video.id}`;
+  return (
+    <a href={url} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", display: "block" }}>
+      <div style={{ background: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 10, overflow: "hidden", cursor: "pointer", transition: "border-color 0.15s" }}
+        onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(255,68,68,0.4)"}
+        onMouseLeave={e => e.currentTarget.style.borderColor = BORDER}>
+        <div style={{ position: "relative", paddingTop: "56.25%", background: "#0a0f1e" }}>
+          <img src={thumb} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+        </div>
+        <div style={{ padding: "10px 12px 12px" }}>
+          <div style={{ fontSize: 12, color: "#f0f6fc", lineHeight: 1.4, marginBottom: 6, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+            {videoTitle(video.message)}
+          </div>
+          <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+            <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: BLUE }}>{video.views.toLocaleString()} views</span>
+            {video.likes > 0 && <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: YT_RED }}>{video.likes.toLocaleString()} likes</span>}
+            {video.comments > 0 && <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: GOLD }}>{video.comments} cmts</span>}
+          </div>
+          <div style={{ fontSize: 10, color: MUTED, marginTop: 4 }}>{video.date}</div>
+        </div>
+      </div>
+    </a>
+  );
+}
+
 export default function App() {
   const engMoM   = Math.round(((734 - 48) / 48) * 100);
   const viewsMoM = Math.round(((83714 - 1850) / 1850) * 100);
   const likesMoM = Math.round(((624 - 26) / 26) * 100);
   const aprEng   = 82;
   const aprPosts = 23;
+
+  const [ytData, setYtData] = useState(null);
+  const [topRange, setTopRange] = useState("all");
+
+  useEffect(() => {
+    fetch("/data/youtube_hootsuite_export.xlsx")
+      .then(r => r.arrayBuffer())
+      .then(buf => {
+        const wb = XLSX.read(buf);
+
+        // ── Account Metrics ──────────────────────────────────────────────
+        const s1 = wb.Sheets[wb.SheetNames[0]];
+        const raw = XLSX.utils.sheet_to_json(s1, { header: 1, defval: "" });
+        const lastRow = raw[raw.length - 1];
+
+        const totalSubscribers  = lastRow[10]; // Page subscribers – Overall aggregated
+        const subscribersGained = lastRow[11]; // Page subscribers gained – Overall aggregated
+        const totalWatchHrs     = Math.round(parseHMS(lastRow[1]) / 3600); // Page watch time – Overall
+        const avgViewDurSec     = parseHMS(lastRow[2]); // Page average view duration – Overall
+
+        const monthMap = {};
+        for (let i = 3; i < raw.length; i++) {
+          const r   = raw[i];
+          const mon = String(r[0]).slice(0, 7);
+          if (!monthMap[mon]) monthMap[mon] = { watchSec: 0, subsLast: 0 };
+          monthMap[mon].watchSec += parseHMS(r[13]); // Col13: daily watch time
+          if (r[9] !== "" && r[9] !== 0) monthMap[mon].subsLast = r[9]; // Col9: running sub count
+        }
+
+        const monthKeys   = Object.keys(monthMap).sort();
+        const monthlyWatch = monthKeys.map(k => ({
+          month: formatMonth(k),
+          watchHrs: parseFloat((monthMap[k].watchSec / 3600).toFixed(1)),
+        }));
+
+        // Net subscriber gain per month (diff of running totals)
+        const monthlySubGain = [];
+        for (let i = 1; i < monthKeys.length; i++) {
+          const prev = monthMap[monthKeys[i - 1]].subsLast;
+          const curr = monthMap[monthKeys[i]].subsLast;
+          if (prev > 0 && curr > 0) {
+            monthlySubGain.push({ month: formatMonth(monthKeys[i]), gain: curr - prev });
+          }
+        }
+
+        // ── Posts table ──────────────────────────────────────────────────
+        const s2    = wb.Sheets[wb.SheetNames[1]];
+        const praw  = XLSX.utils.sheet_to_json(s2, { header: 1, defval: "" });
+        const posts = praw.slice(1).map(r => ({
+          date:     String(r[0]).slice(0, 10),
+          id:       String(r[2]),
+          message:  String(r[4]),
+          likes:    Number(r[8])  || 0,
+          comments: Number(r[9])  || 0,
+          shares:   Number(r[10]) || 0,
+          views:    Number(r[11]) || 0,
+        })).filter(p => p.id && p.id !== "");
+
+        posts.sort((a, b) => b.views - a.views);
+
+        const cutoff90 = new Date();
+        cutoff90.setDate(cutoff90.getDate() - 90);
+        const top10All = posts.slice(0, 10);
+        const top10_90 = posts
+          .filter(p => new Date(p.date) >= cutoff90)
+          .slice(0, 10);
+
+        setYtData({
+          totalSubscribers,
+          subscribersGained,
+          totalWatchHrs,
+          avgViewDurSec,
+          monthlyWatch,
+          monthlySubGain,
+          top10All,
+          top10_90,
+        });
+      });
+  }, []);
+
+  const topVideos = ytData
+    ? (topRange === "90d" ? ytData.top10_90 : ytData.top10All)
+    : [];
 
   return (
     <div style={{ background: "#0a0f1e", minHeight: "100vh", fontFamily: "'DM Sans', sans-serif", color: "#f0f6fc" }}>
@@ -288,12 +424,143 @@ export default function App() {
           </div>
 
         </div>
+
+        {/* ── FRANK LAROSA SECTIONS ──────────────────────────────────────── */}
+        <div style={{ borderTop: `1px solid ${BORDER}`, margin: "32px 0 24px", paddingTop: 24 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
+            <div style={{ width: 4, height: 28, background: YT_RED, borderRadius: 2 }} />
+            <div>
+              <div style={{ fontSize: 16, fontWeight: 600 }}>Frank LaRosa · Channel Deep Dive</div>
+              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: MUTED, letterSpacing: 1, textTransform: "uppercase", marginTop: 2 }}>
+                Hootsuite Export · Jan 2025 – Apr 2026 · 16-Month View
+              </div>
+            </div>
+          </div>
+
+          {!ytData && (
+            <div style={{ padding: "40px 0", textAlign: "center", color: MUTED, fontSize: 13 }}>
+              Loading channel data…
+            </div>
+          )}
+
+          {ytData && (
+            <>
+              {/* ── SECTION 1 + 3: SUBSCRIBERS + WATCH TIME SIDE BY SIDE ── */}
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 14, marginBottom: 14 }}>
+
+                {/* Subscriber Card */}
+                <div style={{ background: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 12, padding: "20px 24px", position: "relative", overflow: "hidden" }}>
+                  <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: GREEN, borderRadius: "12px 12px 0 0" }} />
+                  <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, letterSpacing: 2, color: MUTED, textTransform: "uppercase", marginBottom: 8 }}>Subscribers · All-Time</div>
+                  <div style={{ display: "flex", alignItems: "flex-end", gap: 12, marginBottom: 4 }}>
+                    <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 56, fontWeight: 700, color: "#f0f6fc", lineHeight: 1 }}>
+                      {ytData.totalSubscribers.toLocaleString()}
+                    </div>
+                  </div>
+                  <div style={{ display: "inline-flex", alignItems: "center", gap: 5, background: GREEN_DIM, color: GREEN, fontSize: 12, fontWeight: 600, padding: "4px 10px", borderRadius: 20, marginBottom: 16 }}>
+                    ↑ +{ytData.subscribersGained.toLocaleString()} gained over 16 months
+                  </div>
+                  <div style={{ fontSize: 12, fontWeight: 600, color: MUTED, marginBottom: 8 }}>Net Subscriber Gain · Monthly</div>
+                  <ResponsiveContainer width="100%" height={130}>
+                    <BarChart data={ytData.monthlySubGain} margin={{ top: 0, right: 4, left: -24, bottom: 0 }}>
+                      <CartesianGrid strokeDasharray="3 3" stroke={BORDER} vertical={false} />
+                      <XAxis dataKey="month" tick={{ fill: MUTED, fontSize: 9 }} axisLine={false} tickLine={false} interval={2} />
+                      <YAxis tick={{ fill: MUTED, fontSize: 9 }} axisLine={false} tickLine={false} />
+                      <Tooltip content={<CustomTooltip />} />
+                      <Bar dataKey="gain" name="Net Gain" fill={GREEN} radius={[3, 3, 0, 0]} />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+
+                {/* Watch Time Card */}
+                <div style={{ background: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 12, padding: "20px 24px", position: "relative", overflow: "hidden" }}>
+                  <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: BLUE, borderRadius: "12px 12px 0 0" }} />
+                  <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, letterSpacing: 2, color: MUTED, textTransform: "uppercase", marginBottom: 12 }}>Watch Time · Jan 2025 – Apr 2026</div>
+
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, marginBottom: 20 }}>
+                    {[
+                      { label: "Total Watch Hours", val: ytData.totalWatchHrs.toLocaleString(), unit: "hrs", color: BLUE },
+                      { label: "Avg Per Day", val: Math.round(ytData.totalWatchHrs / 481).toLocaleString(), unit: "hrs/day", color: GOLD },
+                      { label: "Avg View Duration", val: fmtSec(ytData.avgViewDurSec), unit: "min:sec", color: YT_RED },
+                    ].map(s => (
+                      <div key={s.label} style={{ padding: "14px 16px", background: "rgba(255,255,255,0.03)", borderRadius: 8, border: `1px solid ${BORDER}` }}>
+                        <div style={{ fontSize: 11, color: MUTED, marginBottom: 6 }}>{s.label}</div>
+                        <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 28, fontWeight: 700, color: s.color, lineHeight: 1 }}>{s.val}</div>
+                        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: MUTED, marginTop: 4 }}>{s.unit}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div style={{ fontSize: 12, fontWeight: 600, color: MUTED, marginBottom: 8 }}>Monthly Watch Hours</div>
+                  <ResponsiveContainer width="100%" height={140}>
+                    <AreaChart data={ytData.monthlyWatch} margin={{ top: 5, right: 4, left: -10, bottom: 0 }}>
+                      <defs>
+                        <linearGradient id="watchGrad" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor={BLUE} stopOpacity={0.2} />
+                          <stop offset="95%" stopColor={BLUE} stopOpacity={0} />
+                        </linearGradient>
+                      </defs>
+                      <CartesianGrid strokeDasharray="3 3" stroke={BORDER} />
+                      <XAxis dataKey="month" tick={{ fill: MUTED, fontSize: 9 }} axisLine={false} tickLine={false} interval={2} />
+                      <YAxis tick={{ fill: MUTED, fontSize: 9 }} axisLine={false} tickLine={false} tickFormatter={v => `${v}h`} />
+                      <Tooltip content={<CustomTooltip />} />
+                      <Area type="monotone" dataKey="watchHrs" name="Watch Hrs" stroke={BLUE} strokeWidth={2} fill="url(#watchGrad)" dot={false} activeDot={{ r: 4, fill: BLUE }} />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+
+              {/* ── SECTION 2: TOP VIDEOS ── */}
+              <div style={{ background: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 12, padding: "20px 24px", marginBottom: 14 }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
+                  <div>
+                    <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 2 }}>Top Videos by Views</div>
+                    <div style={{ fontSize: 11, color: MUTED }}>Advisor Talk with Frank LaRosa · Hootsuite export</div>
+                  </div>
+                  <div style={{ display: "flex", gap: 6 }}>
+                    {[["all", "All Time"], ["90d", "Last 90 Days"]].map(([v, label]) => (
+                      <button key={v} onClick={() => setTopRange(v)} style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, padding: "5px 12px", borderRadius: 6, border: `1px solid ${topRange === v ? YT_RED : BORDER}`, background: topRange === v ? YT_DIM : "transparent", color: topRange === v ? YT_RED : MUTED, cursor: "pointer", letterSpacing: 0.5 }}>
+                        {label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                {topVideos.length === 0 ? (
+                  <div style={{ padding: "24px 0", textAlign: "center", color: MUTED, fontSize: 13 }}>No videos found for this range.</div>
+                ) : (
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 12 }}>
+                    {topVideos.map((v, i) => (
+                      <div key={v.id} style={{ position: "relative" }}>
+                        <div style={{ position: "absolute", top: 8, left: 8, zIndex: 2, fontFamily: "'DM Mono', monospace", fontSize: 11, fontWeight: 600, color: i === 0 ? "#fff" : MUTED, background: i === 0 ? YT_RED : "rgba(0,0,0,0.6)", padding: "2px 7px", borderRadius: 4 }}>#{i + 1}</div>
+                        <VideoCard video={v} />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* ── SECTION 4: TRAFFIC SOURCES PLACEHOLDER ── */}
+              <div style={{ background: SURFACE, border: `1px solid rgba(255,255,255,0.05)`, borderRadius: 12, padding: "28px 24px", display: "flex", alignItems: "center", gap: 20 }}>
+                <div style={{ width: 44, height: 44, borderRadius: 10, background: "rgba(255,255,255,0.04)", border: `1px solid ${BORDER}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, flexShrink: 0 }}>🔭</div>
+                <div>
+                  <div style={{ fontSize: 14, fontWeight: 600, color: "#f0f6fc", marginBottom: 4 }}>Traffic Sources Breakdown</div>
+                  <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.5 }}>
+                    Coming soon — pending YouTube Studio data. Hootsuite does not export traffic source attribution (search, suggested, browse, external). We&apos;ll add this once Studio access is confirmed.
+                  </div>
+                </div>
+                <div style={{ marginLeft: "auto", flexShrink: 0, fontFamily: "'DM Mono', monospace", fontSize: 10, letterSpacing: 1.5, textTransform: "uppercase", color: MUTED, background: "rgba(255,255,255,0.03)", border: `1px solid ${BORDER}`, padding: "6px 12px", borderRadius: 6 }}>
+                  v2
+                </div>
+              </div>
+            </>
+          )}
+        </div>
       </div>
 
       {/* FOOTER */}
       <div style={{ borderTop: `1px solid ${BORDER}`, padding: "12px 32px", display: "flex", justifyContent: "space-between", fontFamily: "'DM Mono', monospace", fontSize: 10, color: MUTED, marginTop: 24 }}>
         <span>Elite Partners Group · YouTube Dashboard · Advisor Talk with Frank LaRosa</span>
-        <span>Source: Hootsuite YouTube Export · Jan 1 – Apr 9, 2026</span>
+        <span>Source: Hootsuite YouTube Export · Jan 1 – Apr 26, 2026</span>
         <span>110 Q1 videos · 104,764 total views · Apr partial: 23 videos</span>
       </div>
     </div>
