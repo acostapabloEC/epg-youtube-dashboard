@@ -163,18 +163,18 @@ export default function App() {
         const raw = XLSX.utils.sheet_to_json(s1, { header: 1, defval: "" });
         const lastRow = raw[raw.length - 1];
 
-        const totalSubscribers  = lastRow[10]; // Page subscribers – Overall aggregated
-        const subscribersGained = lastRow[11]; // Page subscribers gained – Overall aggregated
-        const totalWatchHrs     = Math.round(parseHMS(lastRow[1]) / 3600); // Page watch time – Overall
-        const avgViewDurSec     = parseHMS(lastRow[2]); // Page average view duration – Overall
+        const totalSubscribers  = lastRow[13]; // Page subscribers – Overall aggregated
+        const subscribersGained = lastRow[2];  // Page subscribers gained – Overall aggregated
+        const totalWatchHrs     = Math.round(parseHMS(lastRow[12]) / 3600); // Page watch time – Overall
+        const avgViewDurSec     = parseHMS(lastRow[8]); // Page average view duration – Overall
 
         const monthMap = {};
         for (let i = 3; i < raw.length; i++) {
           const r   = raw[i];
           const mon = String(r[0]).slice(0, 7);
           if (!monthMap[mon]) monthMap[mon] = { watchSec: 0, subsLast: 0 };
-          monthMap[mon].watchSec += parseHMS(r[13]); // Col13: daily watch time
-          if (r[9] !== "" && r[9] !== 0) monthMap[mon].subsLast = r[9]; // Col9: running sub count
+          monthMap[mon].watchSec += parseHMS(r[9]);  // Col9: daily watch time
+          if (r[14] !== "" && r[14] !== 0) monthMap[mon].subsLast = r[14]; // Col14: running sub count
         }
 
         const monthKeys   = Object.keys(monthMap).sort();
@@ -249,11 +249,11 @@ export default function App() {
           <div style={{ width: 36, height: 36, background: YT_RED, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, color: "#fff" }}>▶</div>
           <div>
             <div style={{ fontSize: 15, fontWeight: 600, letterSpacing: "-0.01em" }}>Elite Partners Group — YouTube Performance</div>
-            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: MUTED, letterSpacing: 1, textTransform: "uppercase" }}>Advisor Talk with Frank LaRosa · Jan–Apr 9, 2026</div>
+            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: MUTED, letterSpacing: 1, textTransform: "uppercase" }}>Advisor Talk with Frank LaRosa · Jan 2025 – May 2026</div>
           </div>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
-          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, letterSpacing: 2, textTransform: "uppercase", background: YT_DIM, color: YT_RED, padding: "5px 12px", borderRadius: 6, border: `1px solid rgba(255,68,68,0.2)` }}>Jan – Apr 9, 2026</div>
+          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, letterSpacing: 2, textTransform: "uppercase", background: YT_DIM, color: YT_RED, padding: "5px 12px", borderRadius: 6, border: `1px solid rgba(255,68,68,0.2)` }}>Jan 2025 – May 2026</div>
           <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, color: MUTED }}>
             <div style={{ width: 8, height: 8, borderRadius: "50%", background: GREEN, animation: "pulse 2s infinite" }} />
             Live Dashboard
@@ -432,7 +432,7 @@ export default function App() {
             <div>
               <div style={{ fontSize: 16, fontWeight: 600 }}>Frank LaRosa · Channel Deep Dive</div>
               <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: MUTED, letterSpacing: 1, textTransform: "uppercase", marginTop: 2 }}>
-                Hootsuite Export · Jan 2025 – Apr 2026 · 16-Month View
+                Hootsuite Export · Jan 2025 – May 2026 · 17-Month View
               </div>
             </div>
           </div>
@@ -458,7 +458,7 @@ export default function App() {
                     </div>
                   </div>
                   <div style={{ display: "inline-flex", alignItems: "center", gap: 5, background: GREEN_DIM, color: GREEN, fontSize: 12, fontWeight: 600, padding: "4px 10px", borderRadius: 20, marginBottom: 16 }}>
-                    ↑ +{ytData.subscribersGained.toLocaleString()} gained over 16 months
+                    ↑ +{ytData.subscribersGained.toLocaleString()} gained over 17 months
                   </div>
                   <div style={{ fontSize: 12, fontWeight: 600, color: MUTED, marginBottom: 8 }}>Net Subscriber Gain · Monthly</div>
                   <ResponsiveContainer width="100%" height={130}>
@@ -475,12 +475,12 @@ export default function App() {
                 {/* Watch Time Card */}
                 <div style={{ background: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 12, padding: "20px 24px", position: "relative", overflow: "hidden" }}>
                   <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: BLUE, borderRadius: "12px 12px 0 0" }} />
-                  <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, letterSpacing: 2, color: MUTED, textTransform: "uppercase", marginBottom: 12 }}>Watch Time · Jan 2025 – Apr 2026</div>
+                  <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, letterSpacing: 2, color: MUTED, textTransform: "uppercase", marginBottom: 12 }}>Watch Time · Jan 2025 – May 2026</div>
 
                   <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, marginBottom: 20 }}>
                     {[
                       { label: "Total Watch Hours", val: ytData.totalWatchHrs.toLocaleString(), unit: "hrs", color: BLUE },
-                      { label: "Avg Per Day", val: Math.round(ytData.totalWatchHrs / 481).toLocaleString(), unit: "hrs/day", color: GOLD },
+                      { label: "Avg Per Day", val: Math.round(ytData.totalWatchHrs / 493).toLocaleString(), unit: "hrs/day", color: GOLD },
                       { label: "Avg View Duration", val: fmtSec(ytData.avgViewDurSec), unit: "min:sec", color: YT_RED },
                     ].map(s => (
                       <div key={s.label} style={{ padding: "14px 16px", background: "rgba(255,255,255,0.03)", borderRadius: 8, border: `1px solid ${BORDER}` }}>
@@ -560,7 +560,7 @@ export default function App() {
       {/* FOOTER */}
       <div style={{ borderTop: `1px solid ${BORDER}`, padding: "12px 32px", display: "flex", justifyContent: "space-between", fontFamily: "'DM Mono', monospace", fontSize: 10, color: MUTED, marginTop: 24 }}>
         <span>Elite Partners Group · YouTube Dashboard · Advisor Talk with Frank LaRosa</span>
-        <span>Source: Hootsuite YouTube Export · Jan 1 – Apr 26, 2026</span>
+        <span>Source: Hootsuite YouTube Export · Jan 2025 – May 2026</span>
         <span>110 Q1 videos · 104,764 total views · Apr partial: 23 videos</span>
       </div>
     </div>
