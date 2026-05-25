@@ -7,33 +7,40 @@ import {
 } from "recharts";
 
 const weeklyData = [
-  { week: "Jan 05", engagements: 17,  likes: 15,  comments: 0, shares: 2,  views: 1231,  posts: 3  },
-  { week: "Jan 12", engagements: 2,   likes: 2,   comments: 0, shares: 0,  views: 60,    posts: 1  },
-  { week: "Jan 19", engagements: 1,   likes: 1,   comments: 0, shares: 0,  views: 320,   posts: 3  },
-  { week: "Jan 26", engagements: 7,   likes: 5,   comments: 0, shares: 2,  views: 1582,  posts: 3  },
-  { week: "Feb 02", engagements: 10,  likes: 4,   comments: 2, shares: 4,  views: 656,   posts: 2  },
-  { week: "Feb 09", engagements: 10,  likes: 5,   comments: 1, shares: 4,  views: 500,   posts: 3  },
-  { week: "Feb 16", engagements: 11,  likes: 8,   comments: 1, shares: 2,  views: 281,   posts: 3  },
-  { week: "Feb 23", engagements: 18,  likes: 10,  comments: 0, shares: 8,  views: 495,   posts: 7  },
-  { week: "Mar 02", engagements: 146, likes: 124, comments: 4, shares: 18, views: 11934, posts: 20 },
-  { week: "Mar 09", engagements: 143, likes: 110, comments: 1, shares: 32, views: 9975,  posts: 15 },
-  { week: "Mar 16", engagements: 166, likes: 139, comments: 4, shares: 23, views: 11934, posts: 20 },
-  { week: "Mar 23", engagements: 227, likes: 204, comments: 7, shares: 16, views: 42329, posts: 23 },
-  { week: "Mar 30", engagements: 125, likes: 112, comments: 3, shares: 10, views: 17421, posts: 20 },
-  { week: "Apr 06", engagements: 8,   likes: 6,   comments: 0, shares: 2,  views: 1089,  posts: 9  },
+  { week: "Jan 05", engagements: 17,  likes: 15,  comments: 0, shares: 2,   views: 1232,  posts: 3  },
+  { week: "Jan 12", engagements: 3,   likes: 3,   comments: 0, shares: 0,   views: 63,    posts: 1  },
+  { week: "Jan 19", engagements: 1,   likes: 1,   comments: 0, shares: 0,   views: 323,   posts: 3  },
+  { week: "Jan 26", engagements: 7,   likes: 5,   comments: 0, shares: 2,   views: 1584,  posts: 3  },
+  { week: "Feb 02", engagements: 10,  likes: 4,   comments: 2, shares: 4,   views: 668,   posts: 2  },
+  { week: "Feb 09", engagements: 10,  likes: 5,   comments: 1, shares: 4,   views: 506,   posts: 3  },
+  { week: "Feb 16", engagements: 11,  likes: 8,   comments: 1, shares: 2,   views: 287,   posts: 3  },
+  { week: "Feb 23", engagements: 18,  likes: 10,  comments: 0, shares: 8,   views: 497,   posts: 7  },
+  { week: "Mar 02", engagements: 143, likes: 121, comments: 4, shares: 18,  views: 11943, posts: 20 },
+  { week: "Mar 09", engagements: 145, likes: 111, comments: 1, shares: 33,  views: 9977,  posts: 15 },
+  { week: "Mar 16", engagements: 167, likes: 139, comments: 4, shares: 24,  views: 11944, posts: 20 },
+  { week: "Mar 23", engagements: 231, likes: 207, comments: 7, shares: 17,  views: 44852, posts: 23 },
+  { week: "Mar 30", engagements: 144, likes: 124, comments: 3, shares: 17,  views: 22005, posts: 20 },
+  { week: "Apr 06", engagements: 69,  likes: 62,  comments: 0, shares: 7,   views: 10284, posts: 20 },
+  { week: "Apr 13", engagements: 675, likes: 526, comments: 8, shares: 141, views: 22589, posts: 22 },
+  { week: "Apr 20", engagements: 79,  likes: 65,  comments: 1, shares: 13,  views: 14063, posts: 23 },
+  { week: "Apr 27", engagements: 61,  likes: 52,  comments: 0, shares: 9,   views: 12029, posts: 23 },
+  { week: "May 04", engagements: 61,  likes: 59,  comments: 0, shares: 2,   views: 17142, posts: 23 },
+  { week: "May 11", engagements: 53,  likes: 49,  comments: 1, shares: 3,   views: 8593,  posts: 17 },
+  { week: "May 18", engagements: 15,  likes: 10,  comments: 0, shares: 5,   views: 1276,  posts: 8  },
 ];
 
 const monthlyData = [
-  { month: "Jan",  engagements: 29,  likes: 24,  comments: 0,  shares: 5,  views: 3324,  posts: 11 },
-  { month: "Feb",  engagements: 48,  likes: 26,  comments: 4,  shares: 18, views: 1850,  posts: 14 },
-  { month: "Mar",  engagements: 734, likes: 624, comments: 19, shares: 91, views: 83714, posts: 85 },
-  { month: "Apr*", engagements: 82,  likes: 72,  comments: 0,  shares: 10, views: 11050, posts: 23 },
+  { month: "Jan",  engagements: 30,  likes: 25,  comments: 0,  shares: 5,   views: 3333,  posts: 11 },
+  { month: "Feb",  engagements: 48,  likes: 26,  comments: 4,  shares: 18,  views: 1876,  posts: 14 },
+  { month: "Mar",  engagements: 738, likes: 625, comments: 19, shares: 94,  views: 86278, posts: 85 },
+  { month: "Apr",  engagements: 948, likes: 761, comments: 9,  shares: 178, views: 67840, posts: 93 },
+  { month: "May*", engagements: 158, likes: 140, comments: 1,  shares: 17,  views: 32661, posts: 57 },
 ];
 
 const topPosts = [
-  { date: "Mar 27", engagements: 91, likes: 87, views: 23784, title: "Ferrari 458 — the one car a real enthusiast would pick" },
-  { date: "Mar 03", engagements: 22, likes: 22, views: 1589,  title: "Range Rover SV vs Lamborghini Urus" },
-  { date: "Mar 03", engagements: 22, likes: 22, views: 903,   title: "3 types of financial advisors on social media" },
+  { date: "Apr 19", engagements: 581, likes: 459, views: 10597, title: "What a privilege to be tired from the work you once begged for" },
+  { date: "Mar 27", engagements: 91,  likes: 87,  views: 23860, title: "Ferrari 458 — the one car a real enthusiast would pick" },
+  { date: "Apr 13", engagements: 51,  likes: 34,  views: 1168,  title: "I sat in on a discovery call once that was painful to watch" },
 ];
 
 const GOLD     = "#c9a84c";
@@ -143,11 +150,11 @@ function VideoCard({ video }) {
 }
 
 export default function App() {
-  const engMoM   = Math.round(((734 - 48) / 48) * 100);
-  const viewsMoM = Math.round(((83714 - 1850) / 1850) * 100);
-  const likesMoM = Math.round(((624 - 26) / 26) * 100);
-  const aprEng   = 82;
-  const aprPosts = 23;
+  const engMoM   = Math.round(((738 - 48) / 48) * 100);
+  const viewsMoM = Math.round(((86278 - 1876) / 1876) * 100);
+  const likesMoM = Math.round(((625 - 26) / 26) * 100);
+  const aprEng   = 948;
+  const aprPosts = 93;
 
   const [ytData, setYtData] = useState(null);
   const [topRange, setTopRange] = useState("all");
@@ -269,11 +276,11 @@ export default function App() {
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
             <div style={{ fontSize: 13, color: YT_RED, fontWeight: 600, textTransform: "uppercase", letterSpacing: 1 }}>⚡ March Breakout</div>
             <div style={{ fontSize: 13, color: MUTED }}>
-              Engagements surged from <span style={{ color: "#f0f6fc", fontWeight: 600 }}>48</span> in Feb to <span style={{ color: YT_RED, fontWeight: 600 }}>734</span> in March — a <span style={{ color: GREEN, fontWeight: 600 }}>+{engMoM.toLocaleString()}%</span> jump · 85 videos published in March vs 14 in Feb
+              Engagements surged from <span style={{ color: "#f0f6fc", fontWeight: 600 }}>48</span> in Feb to <span style={{ color: YT_RED, fontWeight: 600 }}>738</span> in March — a <span style={{ color: GREEN, fontWeight: 600 }}>+{engMoM.toLocaleString()}%</span> jump · April continued strong at <span style={{ color: YT_RED, fontWeight: 600 }}>948</span> eng (93 videos)
             </div>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
-            {[{ label: "Jan", val: "29", sub: "11 videos" }, { label: "Feb", val: "48", sub: "14 videos" }, { label: "Mar", val: "734", sub: "85 videos" }, { label: "Apr*", val: "82", sub: "23 videos" }].map((g) => (
+            {[{ label: "Jan", val: "30", sub: "11 videos" }, { label: "Feb", val: "48", sub: "14 videos" }, { label: "Mar", val: "738", sub: "85 videos" }, { label: "Apr", val: "948", sub: "93 videos" }].map((g) => (
               <div key={g.label} style={{ textAlign: "center" }}>
                 <div style={{ fontSize: 11, color: MUTED, marginBottom: 2 }}>{g.label} Eng</div>
                 <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 20, fontWeight: 700, color: g.label === "Mar" ? YT_RED : "#f0f6fc" }}>{g.val}</div>
