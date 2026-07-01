@@ -27,6 +27,11 @@ const weeklyData = [
   { week: "May 04", engagements: 61,  likes: 59,  comments: 0, shares: 2,   views: 17142, posts: 23 },
   { week: "May 11", engagements: 53,  likes: 49,  comments: 1, shares: 3,   views: 8593,  posts: 17 },
   { week: "May 18", engagements: 15,  likes: 10,  comments: 0, shares: 5,   views: 1276,  posts: 8  },
+  { week: "May 25", engagements: 20,  likes: 16,  comments: 0, shares: 4,   views: 3480,  posts: 18 },
+  { week: "Jun 01", engagements: 14,  likes: 11,  comments: 0, shares: 3,   views: 3098,  posts: 8  },
+  { week: "Jun 08", engagements: 26,  likes: 21,  comments: 0, shares: 5,   views: 6007,  posts: 26 },
+  { week: "Jun 15", engagements: 58,  likes: 54,  comments: 1, shares: 3,   views: 6193,  posts: 11 },
+  { week: "Jun 22", engagements: 37,  likes: 30,  comments: 1, shares: 6,   views: 2886,  posts: 11 },
 ];
 
 const monthlyData = [
@@ -34,13 +39,14 @@ const monthlyData = [
   { month: "Feb",  engagements: 48,  likes: 26,  comments: 4,  shares: 18,  views: 1876,  posts: 14 },
   { month: "Mar",  engagements: 738, likes: 625, comments: 19, shares: 94,  views: 86278, posts: 85 },
   { month: "Apr",  engagements: 948, likes: 761, comments: 9,  shares: 178, views: 67840, posts: 93 },
-  { month: "May*", engagements: 158, likes: 140, comments: 1,  shares: 17,  views: 32661, posts: 57 },
+  { month: "May",  engagements: 308, likes: 255, comments: 1,  shares: 52,  views: 44525, posts: 75 },
+  { month: "Jun",  engagements: 208, likes: 192, comments: 4,  shares: 12,  views: 23963, posts: 55 },
 ];
 
 const topPosts = [
   { date: "Apr 19", engagements: 581, likes: 459, views: 10597, title: "What a privilege to be tired from the work you once begged for" },
   { date: "Mar 27", engagements: 91,  likes: 87,  views: 23860, title: "Ferrari 458 — the one car a real enthusiast would pick" },
-  { date: "Apr 13", engagements: 51,  likes: 34,  views: 1168,  title: "I sat in on a discovery call once that was painful to watch" },
+  { date: "May 6",  engagements: 76,  likes: 60,  views: 5457,  title: "Frank sits down with Mike Durbin, CEO of Cetera, for a candid inside baseball look at one of the largest independent firms" },
 ];
 
 const GOLD     = "#c9a84c";
@@ -150,9 +156,9 @@ function VideoCard({ video }) {
 }
 
 export default function App() {
-  const engMoM   = Math.round(((738 - 48) / 48) * 100);
-  const viewsMoM = Math.round(((86278 - 1876) / 1876) * 100);
-  const likesMoM = Math.round(((625 - 26) / 26) * 100);
+  const engMoM   = Math.round(((208 - 308) / 308) * 100);
+  const viewsMoM = Math.round(((23963 - 44525) / 44525) * 100);
+  const likesMoM = Math.round(((192 - 255) / 255) * 100);
   const aprEng   = 948;
   const aprPosts = 93;
 
@@ -256,11 +262,11 @@ export default function App() {
           <div style={{ width: 36, height: 36, background: YT_RED, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, color: "#fff" }}>▶</div>
           <div>
             <div style={{ fontSize: 15, fontWeight: 600, letterSpacing: "-0.01em" }}>Elite Partners Group — YouTube Performance</div>
-            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: MUTED, letterSpacing: 1, textTransform: "uppercase" }}>Advisor Talk with Frank LaRosa · Jan 2025 – May 2026</div>
+            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: MUTED, letterSpacing: 1, textTransform: "uppercase" }}>Advisor Talk with Frank LaRosa · Jan 2025 – Jun 28, 2026</div>
           </div>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
-          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, letterSpacing: 2, textTransform: "uppercase", background: YT_DIM, color: YT_RED, padding: "5px 12px", borderRadius: 6, border: `1px solid rgba(255,68,68,0.2)` }}>Jan 2025 – May 2026</div>
+          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, letterSpacing: 2, textTransform: "uppercase", background: YT_DIM, color: YT_RED, padding: "5px 12px", borderRadius: 6, border: `1px solid rgba(255,68,68,0.2)` }}>Jan 2025 – Jun 28, 2026</div>
           <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, color: MUTED }}>
             <div style={{ width: 8, height: 8, borderRadius: "50%", background: GREEN, animation: "pulse 2s infinite" }} />
             Live Dashboard
@@ -274,16 +280,16 @@ export default function App() {
         {/* MARCH BREAKOUT BANNER */}
         <div style={{ background: "linear-gradient(135deg, #1a0000 0%, #0f0808 100%)", border: `1px solid rgba(255,68,68,0.25)`, borderRadius: 12, padding: "16px 24px", display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-            <div style={{ fontSize: 13, color: YT_RED, fontWeight: 600, textTransform: "uppercase", letterSpacing: 1 }}>⚡ March Breakout</div>
+            <div style={{ fontSize: 13, color: YT_RED, fontWeight: 600, textTransform: "uppercase", letterSpacing: 1 }}>⚡ June Update</div>
             <div style={{ fontSize: 13, color: MUTED }}>
-              Engagements surged from <span style={{ color: "#f0f6fc", fontWeight: 600 }}>48</span> in Feb to <span style={{ color: YT_RED, fontWeight: 600 }}>738</span> in March — a <span style={{ color: GREEN, fontWeight: 600 }}>+{engMoM.toLocaleString()}%</span> jump · April continued strong at <span style={{ color: YT_RED, fontWeight: 600 }}>948</span> eng (93 videos)
+              <span style={{ color: "#f0f6fc", fontWeight: 600 }}>208</span> engagements across <span style={{ color: "#f0f6fc", fontWeight: 600 }}>55</span> videos through Jun 28 — down from May's <span style={{ color: "#f0f6fc", fontWeight: 600 }}>308</span> as posting volume normalized after the Q1 surge (March peak: <span style={{ color: YT_RED, fontWeight: 600 }}>738</span>)
             </div>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
-            {[{ label: "Jan", val: "30", sub: "11 videos" }, { label: "Feb", val: "48", sub: "14 videos" }, { label: "Mar", val: "738", sub: "85 videos" }, { label: "Apr", val: "948", sub: "93 videos" }].map((g) => (
+            {[{ label: "Mar", val: "738", sub: "85 videos" }, { label: "Apr", val: "948", sub: "93 videos" }, { label: "May", val: "308", sub: "75 videos" }, { label: "Jun", val: "208", sub: "55 videos" }].map((g) => (
               <div key={g.label} style={{ textAlign: "center" }}>
                 <div style={{ fontSize: 11, color: MUTED, marginBottom: 2 }}>{g.label} Eng</div>
-                <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 20, fontWeight: 700, color: g.label === "Mar" ? YT_RED : "#f0f6fc" }}>{g.val}</div>
+                <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 20, fontWeight: 700, color: g.label === "Jun" ? YT_RED : "#f0f6fc" }}>{g.val}</div>
                 <div style={{ fontSize: 10, color: MUTED }}>{g.sub}</div>
               </div>
             ))}
@@ -292,10 +298,10 @@ export default function App() {
 
         {/* ROW 1: KPI CARDS */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14, marginBottom: 20 }}>
-          <KpiCard source="YouTube · Advisor Talk" label="Total Engagements (Mar)" value="734" delta={engMoM} deltaLabel="vs Feb (48)" accent={YT_RED} large />
-          <KpiCard source="YouTube · Advisor Talk" label="Total Likes (Mar)" value="624" delta={likesMoM} deltaLabel="vs Feb (26)" accent={YT_RED} />
-          <KpiCard source="YouTube · Advisor Talk" label="Total Video Views (Mar)" value="83,714" delta={viewsMoM} deltaLabel="vs Feb (1,850)" accent={BLUE} />
-          <KpiCard source="YouTube · Advisor Talk" label="April (partial · 9 days)" value="82 eng" accent={GREEN} sub={`${aprPosts} videos · 11,050 views`} />
+          <KpiCard source="YouTube · Advisor Talk" label="Total Engagements (June, thru 28)" value="208" delta={engMoM} deltaLabel="vs May (308)" accent={YT_RED} large />
+          <KpiCard source="YouTube · Advisor Talk" label="Total Likes (June, thru 28)" value="192" delta={likesMoM} deltaLabel="vs May (255)" accent={YT_RED} />
+          <KpiCard source="YouTube · Advisor Talk" label="Total Video Views (June, thru 28)" value="23,963" delta={viewsMoM} deltaLabel="vs May (44.5K)" accent={BLUE} />
+          <KpiCard source="YouTube · Advisor Talk" label="June Videos" value="55" accent={GREEN} sub="thru Jun 28 · 23,963 views" />
         </div>
 
         {/* ROW 2: CHARTS */}
@@ -401,17 +407,17 @@ export default function App() {
               </div>
             ))}
             <div style={{ marginTop: 8, padding: "10px 14px", background: BLUE_DIM, border: `1px solid rgba(88,166,255,0.15)`, borderRadius: 8, fontSize: 11, color: BLUE, lineHeight: 1.5 }}>
-              💡 Only 3 top posts returned by Hootsuite — Ferrari content drove the March spike
+              💡 Top videos by lifetime views (Hootsuite export)
             </div>
           </div>
 
           <div style={{ background: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 12, padding: "20px 24px" }}>
-            <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 4 }}>March Engagement Breakdown</div>
-            <div style={{ fontSize: 11, color: MUTED, marginBottom: 20 }}>Best month of Q1 · 734 total engagements</div>
+            <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 4 }}>June Engagement Breakdown</div>
+            <div style={{ fontSize: 11, color: MUTED, marginBottom: 20 }}>Through Jun 28 · 208 total engagements</div>
             {[
-              { label: "Likes",    val: 624, total: 734, color: YT_RED },
-              { label: "Shares",   val: 91,  total: 734, color: BLUE   },
-              { label: "Comments", val: 19,  total: 734, color: GOLD   },
+              { label: "Likes",    val: 192, total: 208, color: YT_RED },
+              { label: "Shares",   val: 12,  total: 208, color: BLUE   },
+              { label: "Comments", val: 4,   total: 208, color: GOLD   },
             ].map((item) => (
               <div key={item.label} style={{ marginBottom: 18 }}>
                 <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
@@ -439,7 +445,7 @@ export default function App() {
             <div>
               <div style={{ fontSize: 16, fontWeight: 600 }}>Frank LaRosa · Channel Deep Dive</div>
               <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: MUTED, letterSpacing: 1, textTransform: "uppercase", marginTop: 2 }}>
-                Hootsuite Export · Jan 2025 – May 2026 · 17-Month View
+                Hootsuite Export · Jan 2025 – Jun 28, 2026 · 18-Month View
               </div>
             </div>
           </div>
@@ -567,8 +573,8 @@ export default function App() {
       {/* FOOTER */}
       <div style={{ borderTop: `1px solid ${BORDER}`, padding: "12px 32px", display: "flex", justifyContent: "space-between", fontFamily: "'DM Mono', monospace", fontSize: 10, color: MUTED, marginTop: 24 }}>
         <span>Elite Partners Group · YouTube Dashboard · Advisor Talk with Frank LaRosa</span>
-        <span>Source: Hootsuite YouTube Export · Jan 2025 – May 2026</span>
-        <span>110 Q1 videos · 104,764 total views · Apr partial: 23 videos</span>
+        <span>Source: Hootsuite YouTube Export · Jan 2025 – Jun 28, 2026</span>
+        <span>June: 55 videos · 23,963 views (thru Jun 28)</span>
       </div>
     </div>
   );
