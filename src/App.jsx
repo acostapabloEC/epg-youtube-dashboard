@@ -52,6 +52,23 @@ const topPosts = [
   { date: "May 6",  engagements: 76,  likes: 60,  views: 5457,  title: "Frank sits down with Mike Durbin, CEO of Cetera, for a candid inside baseball look at one of the largest independent firms" },
 ];
 
+// ── Derived from data arrays (update by adding rows to weeklyData/monthlyData) ──
+const MONTH_NAMES = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const DATA_YEAR   = 2026;
+
+const latestWeek  = weeklyData[weeklyData.length - 1];
+const prevWeek    = weeklyData[weeklyData.length - 2];
+const latestMonth = monthlyData[monthlyData.length - 1];
+const prevMonth   = monthlyData[monthlyData.length - 2];
+
+const _wStartDay  = parseInt(latestWeek.week.split(" ")[1]);
+const _wMon       = latestWeek.week.split(" ")[0];
+const _wEndDay    = _wStartDay + 6;
+const weekLabel   = `${_wMon} ${_wStartDay}–${_wEndDay}`;          // "Jul 7–13"
+const dateRangeLabel = `Jan 2025 – ${_wMon} ${_wEndDay}, ${DATA_YEAR}`; // "Jan 2025 – Jul 13, 2026"
+
+const last4Months = monthlyData.slice(-4);
+
 const GOLD     = "#c9a84c";
 const GOLD_DIM = "rgba(201,168,76,0.15)";
 const GREEN    = "#3fb950";
@@ -159,11 +176,9 @@ function VideoCard({ video }) {
 }
 
 export default function App() {
-  const engMoM   = Math.round(((30 - 7) / 7) * 100);
-  const viewsMoM = Math.round(((2486 - 668) / 668) * 100);
-  const likesMoM = Math.round(((30 - 5) / 5) * 100);
-  const aprEng   = 948;
-  const aprPosts = 93;
+  const engMoM   = Math.round(((latestWeek.engagements - prevWeek.engagements) / prevWeek.engagements) * 100);
+  const viewsMoM = Math.round(((latestWeek.views - prevWeek.views) / prevWeek.views) * 100);
+  const likesMoM = Math.round(((latestWeek.likes - prevWeek.likes) / prevWeek.likes) * 100);
 
   const [ytData, setYtData] = useState(null);
   const [topRange, setTopRange] = useState("all");
@@ -265,11 +280,11 @@ export default function App() {
           <div style={{ width: 36, height: 36, background: YT_RED, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, color: "#fff" }}>▶</div>
           <div>
             <div style={{ fontSize: 15, fontWeight: 600, letterSpacing: "-0.01em" }}>Elite Partners Group — YouTube Performance</div>
-            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: MUTED, letterSpacing: 1, textTransform: "uppercase" }}>Advisor Talk with Frank LaRosa · Jan 2025 – Jul 13, 2026</div>
+            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: MUTED, letterSpacing: 1, textTransform: "uppercase" }}>Advisor Talk with Frank LaRosa · {dateRangeLabel}</div>
           </div>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
-          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, letterSpacing: 2, textTransform: "uppercase", background: YT_DIM, color: YT_RED, padding: "5px 12px", borderRadius: 6, border: `1px solid rgba(255,68,68,0.2)` }}>Jan 2025 – Jul 13, 2026</div>
+          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, letterSpacing: 2, textTransform: "uppercase", background: YT_DIM, color: YT_RED, padding: "5px 12px", borderRadius: 6, border: `1px solid rgba(255,68,68,0.2)` }}>{dateRangeLabel}</div>
           <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, color: MUTED }}>
             <div style={{ width: 8, height: 8, borderRadius: "50%", background: GREEN, animation: "pulse 2s infinite" }} />
             Live Dashboard
@@ -283,13 +298,13 @@ export default function App() {
         {/* MARCH BREAKOUT BANNER */}
         <div style={{ background: "linear-gradient(135deg, #1a0000 0%, #0f0808 100%)", border: `1px solid rgba(255,68,68,0.25)`, borderRadius: 12, padding: "16px 24px", display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-            <div style={{ fontSize: 13, color: YT_RED, fontWeight: 600, textTransform: "uppercase", letterSpacing: 1 }}>⚡ July Update</div>
+            <div style={{ fontSize: 13, color: YT_RED, fontWeight: 600, textTransform: "uppercase", letterSpacing: 1 }}>⚡ {latestMonth.month} Update</div>
             <div style={{ fontSize: 13, color: MUTED }}>
-              <span style={{ color: "#f0f6fc", fontWeight: 600 }}>30</span> engagements across <span style={{ color: "#f0f6fc", fontWeight: 600 }}>5</span> videos Jul 7–13; June closed at <span style={{ color: "#f0f6fc", fontWeight: 600 }}>208</span> eng / 55 videos (March peak: <span style={{ color: YT_RED, fontWeight: 600 }}>738</span>)
+              <span style={{ color: "#f0f6fc", fontWeight: 600 }}>{latestWeek.engagements}</span> engagements across <span style={{ color: "#f0f6fc", fontWeight: 600 }}>{latestWeek.posts}</span> videos {weekLabel}; {prevMonth.month} closed at <span style={{ color: "#f0f6fc", fontWeight: 600 }}>{prevMonth.engagements}</span> eng / {prevMonth.posts} videos (March peak: <span style={{ color: YT_RED, fontWeight: 600 }}>738</span>)
             </div>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
-            {[{ label: "Apr", val: "948", sub: "93 videos" }, { label: "May", val: "308", sub: "75 videos" }, { label: "Jun", val: "208", sub: "55 videos" }, { label: "Jul", val: "37", sub: "10 videos" }].map((g) => (
+            {last4Months.map((m) => ({ label: m.month, val: String(m.engagements), sub: `${m.posts} videos` })).map((g) => (
               <div key={g.label} style={{ textAlign: "center" }}>
                 <div style={{ fontSize: 11, color: MUTED, marginBottom: 2 }}>{g.label} Eng</div>
                 <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 20, fontWeight: 700, color: g.label === "Jul" ? YT_RED : "#f0f6fc" }}>{g.val}</div>
@@ -301,10 +316,10 @@ export default function App() {
 
         {/* ROW 1: KPI CARDS */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14, marginBottom: 20 }}>
-          <KpiCard source="YouTube · Advisor Talk" label="Total Engagements (Jul 7–13)" value="30" delta={engMoM} deltaLabel="vs prior week (7)" accent={YT_RED} large />
-          <KpiCard source="YouTube · Advisor Talk" label="Total Likes (Jul 7–13)" value="30" delta={likesMoM} deltaLabel="vs prior week (5)" accent={YT_RED} />
-          <KpiCard source="YouTube · Advisor Talk" label="Total Video Views (Jul 7–13)" value="2,486" delta={viewsMoM} deltaLabel="vs prior week (668)" accent={BLUE} />
-          <KpiCard source="YouTube · Advisor Talk" label="Subscribers" value="2,160" accent={GREEN} sub="Jul 13, 2026 · +10 this week" />
+          <KpiCard source="YouTube · Advisor Talk" label={`Total Engagements (${weekLabel})`} value={latestWeek.engagements.toLocaleString()} delta={engMoM} deltaLabel={`vs prior week (${prevWeek.engagements})`} accent={YT_RED} large />
+          <KpiCard source="YouTube · Advisor Talk" label={`Total Likes (${weekLabel})`} value={latestWeek.likes.toLocaleString()} delta={likesMoM} deltaLabel={`vs prior week (${prevWeek.likes})`} accent={YT_RED} />
+          <KpiCard source="YouTube · Advisor Talk" label={`Total Video Views (${weekLabel})`} value={latestWeek.views.toLocaleString()} delta={viewsMoM} deltaLabel={`vs prior week (${prevWeek.views.toLocaleString()})`} accent={BLUE} />
+          <KpiCard source="YouTube · Advisor Talk" label="Subscribers" value="2,160" accent={GREEN} sub={`${_wMon} ${_wEndDay}, ${DATA_YEAR} · +10 this week`} />
         </div>
 
         {/* ROW 2: CHARTS */}
@@ -415,12 +430,12 @@ export default function App() {
           </div>
 
           <div style={{ background: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 12, padding: "20px 24px" }}>
-            <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 4 }}>June Engagement Breakdown</div>
-            <div style={{ fontSize: 11, color: MUTED, marginBottom: 20 }}>Through Jun 28 · 208 total engagements</div>
+            <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 4 }}>{prevMonth.month} Engagement Breakdown</div>
+            <div style={{ fontSize: 11, color: MUTED, marginBottom: 20 }}>{prevMonth.engagements} total engagements · {prevMonth.posts} videos</div>
             {[
-              { label: "Likes",    val: 192, total: 208, color: YT_RED },
-              { label: "Shares",   val: 12,  total: 208, color: BLUE   },
-              { label: "Comments", val: 4,   total: 208, color: GOLD   },
+              { label: "Likes",    val: prevMonth.likes,    total: prevMonth.engagements, color: YT_RED },
+              { label: "Shares",   val: prevMonth.shares,   total: prevMonth.engagements, color: BLUE   },
+              { label: "Comments", val: prevMonth.comments, total: prevMonth.engagements, color: GOLD   },
             ].map((item) => (
               <div key={item.label} style={{ marginBottom: 18 }}>
                 <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
@@ -576,8 +591,8 @@ export default function App() {
       {/* FOOTER */}
       <div style={{ borderTop: `1px solid ${BORDER}`, padding: "12px 32px", display: "flex", justifyContent: "space-between", fontFamily: "'DM Mono', monospace", fontSize: 10, color: MUTED, marginTop: 24 }}>
         <span>Elite Partners Group · YouTube Dashboard · Advisor Talk with Frank LaRosa</span>
-        <span>Source: Hootsuite YouTube Export · Jan 2025 – Jul 13, 2026</span>
-        <span>June: 55 videos · 23,963 views (thru Jun 28)</span>
+        <span>Source: Hootsuite YouTube Export · {dateRangeLabel}</span>
+        <span>{prevMonth.month}: {prevMonth.posts} videos · {prevMonth.views.toLocaleString()} views</span>
       </div>
     </div>
   );
