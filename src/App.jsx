@@ -265,11 +265,11 @@ export default function App() {
           <div style={{ width: 36, height: 36, background: YT_RED, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, color: "#fff" }}>▶</div>
           <div>
             <div style={{ fontSize: 15, fontWeight: 600, letterSpacing: "-0.01em" }}>Elite Partners Group — YouTube Performance</div>
-            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: MUTED, letterSpacing: 1, textTransform: "uppercase" }}>Advisor Talk with Frank LaRosa · Jan 2025 – Jul 5, 2026</div>
+            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: MUTED, letterSpacing: 1, textTransform: "uppercase" }}>Advisor Talk with Frank LaRosa · Jan 2025 – Jul 13, 2026</div>
           </div>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
-          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, letterSpacing: 2, textTransform: "uppercase", background: YT_DIM, color: YT_RED, padding: "5px 12px", borderRadius: 6, border: `1px solid rgba(255,68,68,0.2)` }}>Jan 2025 – Jul 5, 2026</div>
+          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, letterSpacing: 2, textTransform: "uppercase", background: YT_DIM, color: YT_RED, padding: "5px 12px", borderRadius: 6, border: `1px solid rgba(255,68,68,0.2)` }}>Jan 2025 – Jul 13, 2026</div>
           <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, color: MUTED }}>
             <div style={{ width: 8, height: 8, borderRadius: "50%", background: GREEN, animation: "pulse 2s infinite" }} />
             Live Dashboard
@@ -285,11 +285,11 @@ export default function App() {
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
             <div style={{ fontSize: 13, color: YT_RED, fontWeight: 600, textTransform: "uppercase", letterSpacing: 1 }}>⚡ July Update</div>
             <div style={{ fontSize: 13, color: MUTED }}>
-              <span style={{ color: "#f0f6fc", fontWeight: 600 }}>7</span> engagements across <span style={{ color: "#f0f6fc", fontWeight: 600 }}>5</span> videos Jul 1–5 — early-week pace; June closed at <span style={{ color: "#f0f6fc", fontWeight: 600 }}>208</span> eng / 55 videos (March peak: <span style={{ color: YT_RED, fontWeight: 600 }}>738</span>)
+              <span style={{ color: "#f0f6fc", fontWeight: 600 }}>30</span> engagements across <span style={{ color: "#f0f6fc", fontWeight: 600 }}>5</span> videos Jul 7–13; June closed at <span style={{ color: "#f0f6fc", fontWeight: 600 }}>208</span> eng / 55 videos (March peak: <span style={{ color: YT_RED, fontWeight: 600 }}>738</span>)
             </div>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
-            {[{ label: "Apr", val: "948", sub: "93 videos" }, { label: "May", val: "308", sub: "75 videos" }, { label: "Jun", val: "208", sub: "55 videos" }, { label: "Jul", val: "7", sub: "5 videos" }].map((g) => (
+            {[{ label: "Apr", val: "948", sub: "93 videos" }, { label: "May", val: "308", sub: "75 videos" }, { label: "Jun", val: "208", sub: "55 videos" }, { label: "Jul", val: "37", sub: "10 videos" }].map((g) => (
               <div key={g.label} style={{ textAlign: "center" }}>
                 <div style={{ fontSize: 11, color: MUTED, marginBottom: 2 }}>{g.label} Eng</div>
                 <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 20, fontWeight: 700, color: g.label === "Jul" ? YT_RED : "#f0f6fc" }}>{g.val}</div>
@@ -576,7 +576,7 @@ export default function App() {
       {/* FOOTER */}
       <div style={{ borderTop: `1px solid ${BORDER}`, padding: "12px 32px", display: "flex", justifyContent: "space-between", fontFamily: "'DM Mono', monospace", fontSize: 10, color: MUTED, marginTop: 24 }}>
         <span>Elite Partners Group · YouTube Dashboard · Advisor Talk with Frank LaRosa</span>
-        <span>Source: Hootsuite YouTube Export · Jan 2025 – Jun 28, 2026</span>
+        <span>Source: Hootsuite YouTube Export · Jan 2025 – Jul 13, 2026</span>
         <span>June: 55 videos · 23,963 views (thru Jun 28)</span>
       </div>
     </div>
