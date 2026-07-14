@@ -33,7 +33,7 @@ const weeklyData = [
   { week: "Jun 15", engagements: 58,  likes: 54,  comments: 1, shares: 3,   views: 6193,  posts: 11 },
   { week: "Jun 22", engagements: 37,  likes: 30,  comments: 1, shares: 6,   views: 2886,  posts: 11 },
   { week: "Jul 01", engagements: 7,   likes: 5,   comments: 0, shares: 2,   views: 668,   posts: 5  },
-  { week: "Jul 07", engagements: 30,  likes: 30,  comments: 0, shares: 0,   views: 2486,  posts: 5  },
+  { week: "Jul 06", engagements: 30,  likes: 30,  comments: 0, shares: 0,   views: 2486,  posts: 5  },
 ];
 
 const monthlyData = [
