@@ -33,7 +33,7 @@ const weeklyData = [
   { week: "Jun 15", engagements: 58,  likes: 54,  comments: 1, shares: 3,   views: 6193,  posts: 11 },
   { week: "Jun 22", engagements: 37,  likes: 30,  comments: 1, shares: 6,   views: 2886,  posts: 11 },
   { week: "Jul 01", engagements: 7,   likes: 5,   comments: 0, shares: 2,   views: 668,   posts: 5  },
-  { week: "Jul 06", engagements: 30,  likes: 30,  comments: 0, shares: 0,   views: 2486,  posts: 5  },
+  { week: "Jul 06", engagements: 33,  likes: 29,  comments: 1, shares: 3,   views: 3796,  posts: 10 },
 ];
 
 const monthlyData = [
@@ -43,7 +43,7 @@ const monthlyData = [
   { month: "Apr",  engagements: 948, likes: 761, comments: 9,  shares: 178, views: 67840, posts: 93 },
   { month: "May",  engagements: 308, likes: 255, comments: 1,  shares: 52,  views: 44525, posts: 75 },
   { month: "Jun",  engagements: 208, likes: 192, comments: 4,  shares: 12,  views: 23963, posts: 55 },
-  { month: "Jul",  engagements: 37,  likes: 35,  comments: 0,  shares: 2,   views: 3154,  posts: 10 },
+  { month: "Jul",  engagements: 40,  likes: 34,  comments: 1,  shares: 5,   views: 4464,  posts: 15 },
 ];
 
 const topPosts = [
