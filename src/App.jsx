@@ -35,6 +35,7 @@ const weeklyData = [
   { week: "Jul 01", engagements: 7,   likes: 5,   comments: 0, shares: 2,   views: 668,   posts: 5  },
   { week: "Jul 06", engagements: 33,  likes: 29,  comments: 1, shares: 3,   views: 3796,  posts: 10 },
   { week: "Jul 13", engagements: 59,  likes: 52,  comments: 0, shares: 7,   views: 4817,  posts: 15 },
+  { week: "Jul 20", engagements: 22,  likes: 16,  comments: 1, shares: 5,   views: 3284,  posts: 24 },
 ];
 
 const monthlyData = [
@@ -44,13 +45,13 @@ const monthlyData = [
   { month: "Apr",  engagements: 948, likes: 761, comments: 9,  shares: 178, views: 67840, posts: 93 },
   { month: "May",  engagements: 308, likes: 255, comments: 1,  shares: 52,  views: 44525, posts: 75 },
   { month: "Jun",  engagements: 208, likes: 192, comments: 4,  shares: 12,  views: 23963, posts: 55 },
-  { month: "Jul",  engagements: 99,  likes: 86,  comments: 1,  shares: 12,  views: 9281,  posts: 30 },
+  { month: "Jul",  engagements: 121, likes: 102, comments: 2,  shares: 17,  views: 12565, posts: 54 },
 ];
 
 const topPosts = [
-  { date: "Jul 14", engagements: 22, likes: 19, views: 915, title: "Your goals are not what you say. They are what your actions prove.  Look back at the last …" },
-  { date: "Jul 16", engagements: 20, likes: 19, views: 966, title: "\"The best men have been broken.\"  Hardship has a way of exposing who we really are. It for…" },
-  { date: "Jul 15", engagements: 5,  likes: 2,  views: 27,  title: "What's the real cost of not making a move?  Frank LaRosa and Stacey Frank open with a clie…" },
+  { date: "Jul 22", engagements: 7, likes: 3, views: 42,  title: "How high can these deals actually go?" },
+  { date: "Jul 21", engagements: 5, likes: 3, views: 813, title: "The thing that has cost me the most in business is not a bad strategy or a wrong market de…" },
+  { date: "Jul 23", engagements: 4, likes: 4, views: 582, title: "I call it play work." },
 ];
 
 // ── Derived from data arrays (update by adding rows to weeklyData/monthlyData) ──
@@ -320,7 +321,7 @@ export default function App() {
           <KpiCard source="YouTube · Advisor Talk" label={`Total Engagements (${weekLabel})`} value={latestWeek.engagements.toLocaleString()} delta={engMoM} deltaLabel={`vs prior week (${prevWeek.engagements})`} accent={YT_RED} large />
           <KpiCard source="YouTube · Advisor Talk" label={`Total Likes (${weekLabel})`} value={latestWeek.likes.toLocaleString()} delta={likesMoM} deltaLabel={`vs prior week (${prevWeek.likes})`} accent={YT_RED} />
           <KpiCard source="YouTube · Advisor Talk" label={`Total Video Views (${weekLabel})`} value={latestWeek.views.toLocaleString()} delta={viewsMoM} deltaLabel={`vs prior week (${prevWeek.views.toLocaleString()})`} accent={BLUE} />
-          <KpiCard source="YouTube · Advisor Talk" label="Subscribers" value="2,160" accent={GREEN} sub={`${_wMon} ${_wEndDay}, ${DATA_YEAR} · +0 this week`} />
+          <KpiCard source="YouTube · Advisor Talk" label="Subscribers" value="2,170" accent={GREEN} sub={`${_wMon} ${_wEndDay}, ${DATA_YEAR} · +10 this week`} />
         </div>
 
         {/* ROW 2: CHARTS */}
