@@ -499,15 +499,15 @@ export default function App() {
                     ↑ +{ytData.subscribersGained.toLocaleString()} gained over 17 months
                   </div>
                   <div style={{ fontSize: 12, fontWeight: 600, color: MUTED, marginBottom: 10 }}>Net Subscriber Gain · Monthly</div>
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8 }}>
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(110px, 1fr))", gap: 10 }}>
                     {ytData.monthlySubGain.slice(-6).map((m) => {
                       const isUp   = m.gain > 0;
                       const isFlat = m.gain === 0;
                       const color  = isFlat ? MUTED : isUp ? GREEN : RED;
                       return (
-                        <div key={m.month} style={{ background: "rgba(255,255,255,0.02)", border: `1px solid ${BORDER}`, borderRadius: 8, padding: "8px 10px" }}>
-                          <div style={{ fontSize: 10, color: MUTED, marginBottom: 4 }}>{m.month}</div>
-                          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 15, fontWeight: 700, color }}>
+                        <div key={m.month} style={{ background: "rgba(255,255,255,0.02)", border: `1px solid ${BORDER}`, borderRadius: 10, padding: "16px 18px" }}>
+                          <div style={{ fontSize: 12, color: MUTED, marginBottom: 8 }}>{m.month}</div>
+                          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 28, fontWeight: 700, color }}>
                             {isFlat ? "0" : `${isUp ? "+" : ""}${m.gain.toLocaleString()}`}
                           </div>
                         </div>
