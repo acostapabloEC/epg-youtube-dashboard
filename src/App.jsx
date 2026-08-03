@@ -66,9 +66,13 @@ const prevMonth   = monthlyData[monthlyData.length - 2];
 
 const _wStartDay  = parseInt(latestWeek.week.split(" ")[1]);
 const _wMon       = latestWeek.week.split(" ")[0];
-const _wEndDay    = _wStartDay + 6;
-const weekLabel   = `${_wMon} ${_wStartDay}–${_wEndDay}`;          // "Jul 7–13"
-const dateRangeLabel = `Jan 2025 – ${_wMon} ${_wEndDay}, ${DATA_YEAR}`; // "Jan 2025 – Jul 13, 2026"
+const _wEndDate   = new Date(DATA_YEAR, MONTH_NAMES.indexOf(_wMon), _wStartDay + 6);
+const _wEndDay    = _wEndDate.getDate();
+const _wEndMon    = MONTH_NAMES[_wEndDate.getMonth()];
+const weekLabel   = _wEndMon === _wMon
+  ? `${_wMon} ${_wStartDay}–${_wEndDay}`                           // "Jul 7–13"
+  : `${_wMon} ${_wStartDay}–${_wEndMon} ${_wEndDay}`;               // "Jul 27–Aug 2"
+const dateRangeLabel = `Jan 2025 – ${_wEndMon} ${_wEndDay}, ${DATA_YEAR}`; // "Jan 2025 – Jul 13, 2026"
 
 const last4Months = monthlyData.slice(-4);
 
@@ -322,7 +326,7 @@ export default function App() {
           <KpiCard source="YouTube · Advisor Talk" label={`Total Engagements (${weekLabel})`} value={latestWeek.engagements.toLocaleString()} delta={engMoM} deltaLabel={`vs prior week (${prevWeek.engagements})`} accent={YT_RED} large />
           <KpiCard source="YouTube · Advisor Talk" label={`Total Likes (${weekLabel})`} value={latestWeek.likes.toLocaleString()} delta={likesMoM} deltaLabel={`vs prior week (${prevWeek.likes})`} accent={YT_RED} />
           <KpiCard source="YouTube · Advisor Talk" label={`Total Video Views (${weekLabel})`} value={latestWeek.views.toLocaleString()} delta={viewsMoM} deltaLabel={`vs prior week (${prevWeek.views.toLocaleString()})`} accent={BLUE} />
-          <KpiCard source="YouTube · Advisor Talk" label="Subscribers" value="2,170" accent={GREEN} sub={`${_wMon} ${_wEndDay}, ${DATA_YEAR} · +0 this week`} />
+          <KpiCard source="YouTube · Advisor Talk" label="Subscribers" value="2,170" accent={GREEN} sub={`${_wEndMon} ${_wEndDay}, ${DATA_YEAR} · +0 this week`} />
         </div>
 
         {/* ROW 2: CHARTS */}
