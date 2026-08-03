@@ -368,7 +368,7 @@ export default function App() {
                   <CartesianGrid strokeDasharray="3 3" stroke={BORDER} vertical={false} />
                   <XAxis dataKey="week" tick={{ fill: MUTED, fontSize: 10 }} axisLine={false} tickLine={false} />
                   <YAxis tick={{ fill: MUTED, fontSize: 10 }} axisLine={false} tickLine={false} />
-                  <Tooltip content={<CustomTooltip />} />
+                  <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(255,255,255,0.04)" }} />
                   <Bar dataKey="posts" name="Videos" fill={YT_RED} radius={[3, 3, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
@@ -383,7 +383,7 @@ export default function App() {
                 <CartesianGrid strokeDasharray="3 3" stroke={BORDER} />
                 <XAxis dataKey="month" tick={{ fill: MUTED, fontSize: 11 }} axisLine={false} tickLine={false} />
                 <YAxis tick={{ fill: MUTED, fontSize: 10 }} axisLine={false} tickLine={false} />
-                <Tooltip content={<CustomTooltip />} />
+                <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(255,255,255,0.04)" }} />
                 <Legend wrapperStyle={{ fontSize: 11, color: MUTED }} />
                 <Bar dataKey="likes" name="Likes" fill={YT_RED} radius={[0, 0, 0, 0]} stackId="a" />
                 <Bar dataKey="comments" name="Comments" fill={GOLD} radius={[0, 0, 0, 0]} stackId="a" />
@@ -498,16 +498,22 @@ export default function App() {
                   <div style={{ display: "inline-flex", alignItems: "center", gap: 5, background: GREEN_DIM, color: GREEN, fontSize: 12, fontWeight: 600, padding: "4px 10px", borderRadius: 20, marginBottom: 16 }}>
                     ↑ +{ytData.subscribersGained.toLocaleString()} gained over 17 months
                   </div>
-                  <div style={{ fontSize: 12, fontWeight: 600, color: MUTED, marginBottom: 8 }}>Net Subscriber Gain · Monthly</div>
-                  <ResponsiveContainer width="100%" height={130}>
-                    <BarChart data={ytData.monthlySubGain} margin={{ top: 0, right: 4, left: -24, bottom: 0 }}>
-                      <CartesianGrid strokeDasharray="3 3" stroke={BORDER} vertical={false} />
-                      <XAxis dataKey="month" tick={{ fill: MUTED, fontSize: 9 }} axisLine={false} tickLine={false} interval={2} />
-                      <YAxis tick={{ fill: MUTED, fontSize: 9 }} axisLine={false} tickLine={false} />
-                      <Tooltip content={<CustomTooltip />} />
-                      <Bar dataKey="gain" name="Net Gain" fill={GREEN} radius={[3, 3, 0, 0]} />
-                    </BarChart>
-                  </ResponsiveContainer>
+                  <div style={{ fontSize: 12, fontWeight: 600, color: MUTED, marginBottom: 10 }}>Net Subscriber Gain · Monthly</div>
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8 }}>
+                    {ytData.monthlySubGain.slice(-6).map((m) => {
+                      const isUp   = m.gain > 0;
+                      const isFlat = m.gain === 0;
+                      const color  = isFlat ? MUTED : isUp ? GREEN : RED;
+                      return (
+                        <div key={m.month} style={{ background: "rgba(255,255,255,0.02)", border: `1px solid ${BORDER}`, borderRadius: 8, padding: "8px 10px" }}>
+                          <div style={{ fontSize: 10, color: MUTED, marginBottom: 4 }}>{m.month}</div>
+                          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 15, fontWeight: 700, color }}>
+                            {isFlat ? "0" : `${isUp ? "+" : ""}${m.gain.toLocaleString()}`}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
 
                 {/* Watch Time Card */}
