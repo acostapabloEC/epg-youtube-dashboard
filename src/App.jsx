@@ -39,6 +39,7 @@ const weeklyData = [
   { week: "Jul 27", engagements: 35,  likes: 30,  comments: 2, shares: 3,   views: 3710,  posts: 11 },
   { week: "Aug 03", engagements: 58,  likes: 48,  comments: 1, shares: 9,   views: 6267,  posts: 11 },
   { week: "Aug 10", engagements: 44,  likes: 39,  comments: 0, shares: 5,   views: 4224,  posts: 9  },
+  { week: "Aug 17", engagements: 61,  likes: 58,  comments: 0, shares: 3,   views: 5386,  posts: 11 },
 ];
 
 const monthlyData = [
@@ -49,13 +50,13 @@ const monthlyData = [
   { month: "May",  engagements: 308, likes: 255, comments: 1,  shares: 52,  views: 44525, posts: 75 },
   { month: "Jun",  engagements: 208, likes: 192, comments: 4,  shares: 12,  views: 23963, posts: 55 },
   { month: "Jul",  engagements: 156, likes: 132, comments: 4,  shares: 20,  views: 16275, posts: 65 },
-  { month: "Aug",  engagements: 102, likes: 87,  comments: 1,  shares: 14,  views: 10491, posts: 20 },
+  { month: "Aug",  engagements: 163, likes: 145, comments: 1,  shares: 17,  views: 15877, posts: 31 },
 ];
 
 const topPosts = [
-  { date: "Aug 13", engagements: 14, likes: 13, views: 948,  title: "The magic you are looking for is in the work you are not doing." },
-  { date: "Aug 12", engagements: 10, likes: 10, views: 1014, title: "I built this car knowing I was never going to sell it." },
-  { date: "Aug 11", engagements: 7,  likes: 7,  views: 644,  title: "Imagine how good you could be if you actually loved what you did." },
+  { date: "Aug 17", engagements: 16, likes: 16, views: 1258, title: "Be the person who tries again after failure." },
+  { date: "Aug 19", engagements: 14, likes: 14, views: 1151, title: "Nobody believes in you. You have lost again. The lights are cut off." },
+  { date: "Aug 20", engagements: 13, likes: 13, views: 885,  title: "I bought my race car for $150,000. I could sell it today for around $180,000." },
 ];
 
 // ── Derived from data arrays (update by adding rows to weeklyData/monthlyData) ──
@@ -329,7 +330,7 @@ export default function App() {
           <KpiCard source="YouTube · Advisor Talk" label={`Total Engagements (${weekLabel})`} value={latestWeek.engagements.toLocaleString()} delta={engMoM} deltaLabel={`vs prior week (${prevWeek.engagements})`} accent={YT_RED} large />
           <KpiCard source="YouTube · Advisor Talk" label={`Total Likes (${weekLabel})`} value={latestWeek.likes.toLocaleString()} delta={likesMoM} deltaLabel={`vs prior week (${prevWeek.likes})`} accent={YT_RED} />
           <KpiCard source="YouTube · Advisor Talk" label={`Total Video Views (${weekLabel})`} value={latestWeek.views.toLocaleString()} delta={viewsMoM} deltaLabel={`vs prior week (${prevWeek.views.toLocaleString()})`} accent={BLUE} />
-          <KpiCard source="YouTube · Advisor Talk" label="Subscribers" value="2,190" accent={GREEN} sub={`${_wEndMon} ${_wEndDay}, ${DATA_YEAR} · +10 this week`} />
+          <KpiCard source="YouTube · Advisor Talk" label="Subscribers" value="2,200" accent={GREEN} sub={`${_wEndMon} ${_wEndDay}, ${DATA_YEAR} · +10 this week`} />
         </div>
 
         {/* ROW 2: CHARTS */}
