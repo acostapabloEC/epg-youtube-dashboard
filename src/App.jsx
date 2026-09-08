@@ -41,6 +41,7 @@ const weeklyData = [
   { week: "Aug 10", engagements: 44,  likes: 39,  comments: 0, shares: 5,   views: 4224,  posts: 9  },
   { week: "Aug 17", engagements: 61,  likes: 58,  comments: 0, shares: 3,   views: 5386,  posts: 11 },
   { week: "Aug 24", engagements: 73,  likes: 65,  comments: 3, shares: 5,   views: 5972,  posts: 12 },
+  { week: "Aug 31", engagements: 52,  likes: 50,  comments: 0, shares: 2,   views: 4625,  posts: 14 },
 ];
 
 const monthlyData = [
@@ -51,13 +52,13 @@ const monthlyData = [
   { month: "May",  engagements: 308, likes: 255, comments: 1,  shares: 52,  views: 44525, posts: 75 },
   { month: "Jun",  engagements: 208, likes: 192, comments: 4,  shares: 12,  views: 23963, posts: 55 },
   { month: "Jul",  engagements: 156, likes: 132, comments: 4,  shares: 20,  views: 16275, posts: 65 },
-  { month: "Aug",  engagements: 236, likes: 210, comments: 4,  shares: 22,  views: 21849, posts: 43 },
+  { month: "Aug",  engagements: 288, likes: 260, comments: 4,  shares: 24,  views: 26474, posts: 57 },
 ];
 
 const topPosts = [
-  { date: "Aug 28", engagements: 15, likes: 14, views: 961,  title: "Nobody is ever ready. That is the whole myth." },
-  { date: "Aug 28", engagements: 12, likes: 12, views: 927,  title: "Who actually uses Wet Mode in a supercar? 😅" },
-  { date: "Aug 24", engagements: 12, likes: 11, views: 1178, title: "Buy cars you love. Stop worrying about whether they go up in value." },
+  { date: "Sep 2", engagements: 21, likes: 19, views: 898,  title: "Success is not the best revenge. It is the only revenge." },
+  { date: "Sep 2", engagements: 14, likes: 14, views: 953,  title: "Want to get into racing but you are young and not ready to drop Ferrari money. Here is whe…" },
+  { date: "Sep 4", engagements: 7,  likes: 7,  views: 1111, title: "Same firm. Same payout. Same frustrations. Same conversations about making a change that n…" },
 ];
 
 // ── Derived from data arrays (update by adding rows to weeklyData/monthlyData) ──
@@ -331,7 +332,7 @@ export default function App() {
           <KpiCard source="YouTube · Advisor Talk" label={`Total Engagements (${weekLabel})`} value={latestWeek.engagements.toLocaleString()} delta={engMoM} deltaLabel={`vs prior week (${prevWeek.engagements})`} accent={YT_RED} large />
           <KpiCard source="YouTube · Advisor Talk" label={`Total Likes (${weekLabel})`} value={latestWeek.likes.toLocaleString()} delta={likesMoM} deltaLabel={`vs prior week (${prevWeek.likes})`} accent={YT_RED} />
           <KpiCard source="YouTube · Advisor Talk" label={`Total Video Views (${weekLabel})`} value={latestWeek.views.toLocaleString()} delta={viewsMoM} deltaLabel={`vs prior week (${prevWeek.views.toLocaleString()})`} accent={BLUE} />
-          <KpiCard source="YouTube · Advisor Talk" label="Subscribers" value="2,200" accent={GREEN} sub={`${_wEndMon} ${_wEndDay}, ${DATA_YEAR} · +0 this week`} />
+          <KpiCard source="YouTube · Advisor Talk" label="Subscribers" value="2,210" accent={GREEN} sub={`${_wEndMon} ${_wEndDay}, ${DATA_YEAR} · +10 this week`} />
         </div>
 
         {/* ROW 2: CHARTS */}
