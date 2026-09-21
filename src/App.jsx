@@ -43,6 +43,7 @@ const weeklyData = [
   { week: "Aug 24", engagements: 73,  likes: 65,  comments: 3, shares: 5,   views: 5972,  posts: 12 },
   { week: "Aug 31", engagements: 52,  likes: 50,  comments: 0, shares: 2,   views: 4625,  posts: 14 },
   { week: "Sep 07", engagements: 17,  likes: 15,  comments: 1, shares: 1,   views: 2038,  posts: 10 },
+  { week: "Sep 14", engagements: 51,  likes: 46,  comments: 1, shares: 4,   views: 4295,  posts: 12 },
 ];
 
 const monthlyData = [
@@ -54,13 +55,13 @@ const monthlyData = [
   { month: "Jun",  engagements: 208, likes: 192, comments: 4,  shares: 12,  views: 23963, posts: 55 },
   { month: "Jul",  engagements: 156, likes: 132, comments: 4,  shares: 20,  views: 16275, posts: 65 },
   { month: "Aug",  engagements: 288, likes: 260, comments: 4,  shares: 24,  views: 26474, posts: 57 },
-  { month: "Sep",  engagements: 17,  likes: 15,  comments: 1,  shares: 1,   views: 2038,  posts: 10 },
+  { month: "Sep",  engagements: 68,  likes: 61,  comments: 2,  shares: 5,   views: 6333,  posts: 22 },
 ];
 
 const topPosts = [
-  { date: "Sep 10", engagements: 9, likes: 8, views: 734, title: "Why not you." },
-  { date: "Sep 8",  engagements: 4, likes: 4, views: 806, title: "When I meet a couple that has been married 40 or 50 years I am genuinely in awe." },
-  { date: "Sep 9",  engagements: 2, likes: 1, views: 396, title: "When someone asks what you do for a living and you say financial advisor you just lost the…" },
+  { date: "Sep 18", engagements: 20, likes: 19, views: 1002, title: "After every prolonged period of hardship there is a quantum leap waiting on the other side…" },
+  { date: "Sep 16", engagements: 11, likes: 11, views: 1011, title: "The most miserable people I know are the ones who never take any risks." },
+  { date: "Sep 16", engagements: 7,  likes: 5,  views: 886,  title: "Here is exactly how I use AI in my business right now. No fluff." },
 ];
 
 // ── Derived from data arrays (update by adding rows to weeklyData/monthlyData) ──
