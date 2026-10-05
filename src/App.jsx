@@ -45,6 +45,7 @@ const weeklyData = [
   { week: "Sep 07", engagements: 17,  likes: 15,  comments: 1, shares: 1,   views: 2038,  posts: 10 },
   { week: "Sep 14", engagements: 51,  likes: 46,  comments: 1, shares: 4,   views: 4295,  posts: 12 },
   { week: "Sep 21", engagements: 13,  likes: 12,  comments: 1, shares: 0,   views: 1125,  posts: 9  },
+  { week: "Sep 28", engagements: 15,  likes: 12,  comments: 1, shares: 2,   views: 2956,  posts: 12 },
 ];
 
 const monthlyData = [
@@ -56,13 +57,13 @@ const monthlyData = [
   { month: "Jun",  engagements: 208, likes: 192, comments: 4,  shares: 12,  views: 23963, posts: 55 },
   { month: "Jul",  engagements: 156, likes: 132, comments: 4,  shares: 20,  views: 16275, posts: 65 },
   { month: "Aug",  engagements: 288, likes: 260, comments: 4,  shares: 24,  views: 26474, posts: 57 },
-  { month: "Sep",  engagements: 81,  likes: 73,  comments: 3,  shares: 5,   views: 7458,  posts: 31 },
+  { month: "Sep",  engagements: 96,  likes: 85,  comments: 4,  shares: 7,   views: 10414, posts: 43 },
 ];
 
 const topPosts = [
-  { date: "Sep 24", engagements: 6, likes: 6, views: 751, title: "The harder you work, the harder it is to quit." },
-  { date: "Sep 22", engagements: 4, likes: 4, views: 147, title: "Treat every day like game day, or you will never be ready when it actually is." },
-  { date: "Sep 21", engagements: 2, likes: 1, views: 40,  title: "What if a client begged to follow you to your new firm and you legally could not say yes?" },
+  { date: "Oct 1",  engagements: 4, likes: 4, views: 601, title: "My wife is the one who introduced me to Andy Frisella. And it changed everything." },
+  { date: "Sep 30", engagements: 3, likes: 3, views: 979, title: "Alex Hormozi will learn from anybody. And that is exactly why he is where he is." },
+  { date: "Sep 28", engagements: 3, likes: 2, views: 140, title: "Is Reddit really the place to find your next role as a financial advisor?" },
 ];
 
 // ── Derived from data arrays (update by adding rows to weeklyData/monthlyData) ──
@@ -336,7 +337,7 @@ export default function App() {
           <KpiCard source="YouTube · Advisor Talk" label={`Total Engagements (${weekLabel})`} value={latestWeek.engagements.toLocaleString()} delta={engMoM} deltaLabel={`vs prior week (${prevWeek.engagements})`} accent={YT_RED} large />
           <KpiCard source="YouTube · Advisor Talk" label={`Total Likes (${weekLabel})`} value={latestWeek.likes.toLocaleString()} delta={likesMoM} deltaLabel={`vs prior week (${prevWeek.likes})`} accent={YT_RED} />
           <KpiCard source="YouTube · Advisor Talk" label={`Total Video Views (${weekLabel})`} value={latestWeek.views.toLocaleString()} delta={viewsMoM} deltaLabel={`vs prior week (${prevWeek.views.toLocaleString()})`} accent={BLUE} />
-          <KpiCard source="YouTube · Advisor Talk" label="Subscribers" value="2,220" accent={GREEN} sub={`${_wEndMon} ${_wEndDay}, ${DATA_YEAR} · +10 this week`} />
+          <KpiCard source="YouTube · Advisor Talk" label="Subscribers" value="2,230" accent={GREEN} sub={`${_wEndMon} ${_wEndDay}, ${DATA_YEAR} · +10 this week`} />
         </div>
 
         {/* ROW 2: CHARTS */}
