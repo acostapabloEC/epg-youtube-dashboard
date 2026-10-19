@@ -60,7 +60,7 @@ There's no archive and no `--no-scrape` mode; every run hits the live API.
   does NOT have this problem, so don't add the same +1 there.
 - YouTube view/like counts and post visibility keep accruing for a few days after a video
   posts — a pull done right after the week closes can undercount it. Accepted tradeoff, not
-  something this script tries to compensate for (see Monday 9am cadence below).
+  something this script tries to compensate for (see Monday 8am cadence below).
 
 Weekly workflow:
 1. Run `node youtube_report.mjs <mon> <sun> --json` from `epg-marketing-dashboard\scraper\` — gives engagements/likes/comments/shares/views/posts + top 3 videos + subscriber total/gain for the exact week
@@ -71,7 +71,7 @@ Weekly workflow:
 6. `git add src/App.jsx && git commit -m "Data: Jul 06-12" && git push`
 7. Vercel auto-deploys on push
 
-This is now fully automated — scheduled task `epg-youtube-weekly-update`, Mondays 9am
+This is now fully automated — scheduled task `epg-youtube-weekly-update`, Mondays 8am
 (`C:\Users\ECP\.claude\scheduled-tasks\epg-youtube-weekly-update\SKILL.md`). This dashboard is
 a fully separate session/automation from Instagram — must never touch `instagram_report.mjs`,
 `epg-instagram-dashboard`, or any `instagram_*` file.
