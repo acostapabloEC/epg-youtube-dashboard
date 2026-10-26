@@ -48,6 +48,7 @@ const weeklyData = [
   { week: "Sep 28", engagements: 15,  likes: 12,  comments: 1, shares: 2,   views: 2956,  posts: 12 },
   { week: "Oct 05", engagements: 21,  likes: 21,  comments: 0, shares: 0,   views: 3156,  posts: 10 },
   { week: "Oct 12", engagements: 12,  likes: 11,  comments: 0, shares: 1,   views: 3292,  posts: 11 },
+  { week: "Oct 19", engagements: 1,   likes: 1,   comments: 0, shares: 0,   views: 350,   posts: 10 },
 ];
 
 const monthlyData = [
@@ -60,13 +61,13 @@ const monthlyData = [
   { month: "Jul",  engagements: 156, likes: 132, comments: 4,  shares: 20,  views: 16275, posts: 65 },
   { month: "Aug",  engagements: 288, likes: 260, comments: 4,  shares: 24,  views: 26474, posts: 57 },
   { month: "Sep",  engagements: 96,  likes: 85,  comments: 4,  shares: 7,   views: 10414, posts: 43 },
-  { month: "Oct",  engagements: 33,  likes: 32,  comments: 0,  shares: 1,   views: 6448,  posts: 21 },
+  { month: "Oct",  engagements: 34,  likes: 33,  comments: 0,  shares: 1,   views: 6798,  posts: 31 },
 ];
 
 const topPosts = [
-  { date: "Oct 13", engagements: 5, likes: 5, views: 988, title: "A man must have a quest." },
-  { date: "Oct 14", engagements: 3, likes: 3, views: 901, title: "When you're driving through thick fog on the track, you know the back straight is clear ah…" },
-  { date: "Oct 15", engagements: 2, likes: 1, views: 490, title: "The ultimate car collector's dilemma. You look at the market, see a low-mileage 458 pullin…" },
+  { date: "Oct 19", engagements: 1, likes: 1, views: 48, title: "Is a succession deal inside a wirehouse really worth the short-term pain?" },
+  { date: "Oct 24", engagements: 0, likes: 0, views: 0, title: "Until you find faith, recovery doesn't start." },
+  { date: "Oct 23", engagements: 0, likes: 0, views: 0, title: "People see the fancy cars, the success, and all the stuff online but they don't see the ye…" },
 ];
 
 // ── Derived from data arrays (update by adding rows to weeklyData/monthlyData) ──
@@ -340,7 +341,7 @@ export default function App() {
           <KpiCard source="YouTube · Advisor Talk" label={`Total Engagements (${weekLabel})`} value={latestWeek.engagements.toLocaleString()} delta={engMoM} deltaLabel={`vs prior week (${prevWeek.engagements})`} accent={YT_RED} large />
           <KpiCard source="YouTube · Advisor Talk" label={`Total Likes (${weekLabel})`} value={latestWeek.likes.toLocaleString()} delta={likesMoM} deltaLabel={`vs prior week (${prevWeek.likes})`} accent={YT_RED} />
           <KpiCard source="YouTube · Advisor Talk" label={`Total Video Views (${weekLabel})`} value={latestWeek.views.toLocaleString()} delta={viewsMoM} deltaLabel={`vs prior week (${prevWeek.views.toLocaleString()})`} accent={BLUE} />
-          <KpiCard source="YouTube · Advisor Talk" label="Subscribers" value="2,250" accent={GREEN} sub={`${_wEndMon} ${_wEndDay}, ${DATA_YEAR} · +10 this week`} />
+          <KpiCard source="YouTube · Advisor Talk" label="Subscribers" value="2,250" accent={GREEN} sub={`${_wEndMon} ${_wEndDay}, ${DATA_YEAR} · +0 this week`} />
         </div>
 
         {/* ROW 2: CHARTS */}
