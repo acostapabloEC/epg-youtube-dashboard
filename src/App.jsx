@@ -49,6 +49,7 @@ const weeklyData = [
   { week: "Oct 05", engagements: 21,  likes: 21,  comments: 0, shares: 0,   views: 3156,  posts: 10 },
   { week: "Oct 12", engagements: 12,  likes: 11,  comments: 0, shares: 1,   views: 3292,  posts: 11 },
   { week: "Oct 19", engagements: 1,   likes: 1,   comments: 0, shares: 0,   views: 350,   posts: 10 },
+  { week: "Oct 26", engagements: 20,  likes: 17,  comments: 1, shares: 2,   views: 1660,  posts: 12 },
 ];
 
 const monthlyData = [
@@ -61,13 +62,13 @@ const monthlyData = [
   { month: "Jul",  engagements: 156, likes: 132, comments: 4,  shares: 20,  views: 16275, posts: 65 },
   { month: "Aug",  engagements: 288, likes: 260, comments: 4,  shares: 24,  views: 26474, posts: 57 },
   { month: "Sep",  engagements: 96,  likes: 85,  comments: 4,  shares: 7,   views: 10414, posts: 43 },
-  { month: "Oct",  engagements: 34,  likes: 33,  comments: 0,  shares: 1,   views: 6798,  posts: 31 },
+  { month: "Oct",  engagements: 54,  likes: 50,  comments: 1,  shares: 3,   views: 8458,  posts: 43 },
 ];
 
 const topPosts = [
-  { date: "Oct 19", engagements: 1, likes: 1, views: 48, title: "Is a succession deal inside a wirehouse really worth the short-term pain?" },
-  { date: "Oct 24", engagements: 0, likes: 0, views: 0, title: "Until you find faith, recovery doesn't start." },
-  { date: "Oct 23", engagements: 0, likes: 0, views: 0, title: "People see the fancy cars, the success, and all the stuff online but they don't see the ye…" },
+  { date: "Oct 29", engagements: 14, likes: 13, views: 1102, title: "Being fast on the track is only half the battle. Knowing how to be passed safely is where …" },
+  { date: "Oct 26", engagements: 3, likes: 1, views: 37, title: "What should a 27-year-old advisor know before buying into his firm's Ameriprise franchise?" },
+  { date: "Oct 27", engagements: 2, likes: 2, views: 91, title: "Do not quit." },
 ];
 
 // ── Derived from data arrays (update by adding rows to weeklyData/monthlyData) ──
