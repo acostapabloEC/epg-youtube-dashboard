@@ -52,6 +52,7 @@ const weeklyData = [
   { week: "Oct 26", engagements: 20,  likes: 17,  comments: 1, shares: 2,   views: 1660,  posts: 12 },
   { week: "Nov 02", engagements: 0, likes: 0, comments: 0, shares: 0, views: 1, posts: 1 },
   { week: "Nov 09", engagements: 4, likes: 1, comments: 0, shares: 3, views: 120, posts: 1 },
+  { week: "Nov 16", engagements: 2, likes: 0, comments: 0, shares: 2, views: 53, posts: 1 },
 ];
 
 const monthlyData = [
@@ -65,11 +66,11 @@ const monthlyData = [
   { month: "Aug",  engagements: 288, likes: 260, comments: 4,  shares: 24,  views: 26474, posts: 57 },
   { month: "Sep",  engagements: 96,  likes: 85,  comments: 4,  shares: 7,   views: 10414, posts: 43 },
   { month: "Oct",  engagements: 54,  likes: 50,  comments: 1,  shares: 3,   views: 8458,  posts: 43 },
-  { month: "Nov", engagements: 4, likes: 1, comments: 0, shares: 3, views: 121, posts: 2 },
+  { month: "Nov", engagements: 6, likes: 1, comments: 0, shares: 5, views: 174, posts: 3 },
 ];
 
 const topPosts = [
-  { date: "Nov 12", engagements: 4, likes: 1, views: 120, title: "Download the The Elite Wealth Management Insight Report 2026 Year-to-Date Edition:" },
+  { date: "Nov 19", engagements: 2, likes: 0, views: 53, title: "What does it actually feel like to leave the only firm you have ever known?" },
 ];
 
 // ── Derived from data arrays (update by adding rows to weeklyData/monthlyData) ──
